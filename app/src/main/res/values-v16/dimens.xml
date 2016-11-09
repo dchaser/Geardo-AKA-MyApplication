@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="overlay_width">80dp</dimen>
+    <dimen name="iv_width_prodcut_page">20dp</dimen>
+    <dimen name="iv_height_product_page">30dp</dimen>
+</resources>

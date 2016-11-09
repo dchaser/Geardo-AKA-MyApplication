@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpBanner"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="200dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_recycler_view"
+        android:layout_below="@+id/vpBanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/bottomToolbar"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray">
+
+        <!--Button bar bottom-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:weightSum="5"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center|bottom"
+            android:orientation="horizontal" >
+
+            <!--Home-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/home"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="10sp"
+                    android:text="Home"/>
+
+
+            </LinearLayout>
+
+            <!--Categories-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/categories"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="10sp"
+                    android:text="Categories"/>
+
+
+            </LinearLayout>
+
+            <!--Search-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_search_gray_18dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="10sp"
+                    android:text="Search"/>
+
+
+            </LinearLayout>
+
+            <!--Cart-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/cart"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="10sp"
+                    android:text="Cart"/>
+
+
+            </LinearLayout>
+
+            <!--Account-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/account"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="10sp"
+                    android:text="Account"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+</RelativeLayout>
+

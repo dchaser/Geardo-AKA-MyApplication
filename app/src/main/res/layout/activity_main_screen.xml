@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/drawer_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    android:fitsSystemWindows="true"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="au.com.slidenerdnavdrawer.MainActivity">
+
+<include
+    android:id="@+id/appToolBar"
+    layout="@layout/app_bar"/>
+
+
+
+
+</RelativeLayout>
+
+    <fragment
+        android:id="@+id/fragment_navigation_drawer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:name="au.com.slidenerdnavdrawer.MainScreen.NavdrawerMainActivity.NavigationDrawerFragment"
+        tools:layout='@layout/fragment_navigation_drawer'
+        app:layout="@layout/fragment_navigation_drawer"/>
+
+</android.support.v4.widget.DrawerLayout>

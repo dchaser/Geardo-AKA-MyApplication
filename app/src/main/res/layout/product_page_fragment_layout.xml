@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:baselineAligned="false"
+        android:id="@+id/rlMainGalleryView"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="0.65"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".FullProductPage">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/gallery_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+
+        </RelativeLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_weight="0.6">-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/ivBigLeft"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:contentDescription="@string/app_name"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/dress_big" />-->
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="0.4"-->
+            <!--android:orientation="vertical">-->
+
+
+            <!--<ImageView-->
+                <!--android:id="@+id/ivSmallRightOne"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:contentDescription="@string/app_name"-->
+                <!--android:scaleType="centerInside"-->
+                <!--android:src="@drawable/dress_smalltwo" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/ivSmallRightTwo"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:scaleType="centerInside"-->
+                <!--android:contentDescription="@string/app_name"-->
+                <!--android:src="@drawable/dress_smalltwo" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/ivSmallRightThree"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:scaleType="centerInside"-->
+                <!--android:contentDescription="@string/app_name"-->
+                <!--android:src="@drawable/dress_smalltwo"/>-->
+
+
+        <!--</LinearLayout>-->
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.35"
+        android:orientation="vertical" />
+
+
+</LinearLayout>
+
+
+
+
