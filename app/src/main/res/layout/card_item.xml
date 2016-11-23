@@ -1,45 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:elevation="4dp"
+    android:clickable="true"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="200dp">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
+        android:id="@+id/relativelayout"
         android:layout_width="match_parent"
-        android:layout_margin="2dp"
-        android:clickable="true"
-        android:layout_height="wrap_content"
-        card_view:cardCornerRadius="2dp"
-        card_view:elevation="4dp"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivProductImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/xiaomi_power_bank" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/iv_image"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:scaleType="centerInside"
-                android:src="@drawable/cable">
-            </ImageView>
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/ivProductImage"
+            android:layout_alignEnd="@id/ivProductImage"
+            android:layout_alignLeft="@id/ivProductImage"
+            android:layout_alignRight="@id/ivProductImage"
+            android:layout_alignStart="@id/ivProductImage"
+            android:alpha="0.6"
+            android:background="@color/black">
 
             <TextView
-                android:id="@+id/tv_text"
-                android:layout_below ="@+id/iv_image"
+                android:id="@+id/tvProductTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp"
+                android:gravity="center_horizontal"
+                android:text="Xiaomi 10000mAh Power Bank"
+                android:textColor="@color/white"
                 android:textSize="15sp"
-                android:text="$15.99"
-                android:gravity="center" >
-            </TextView>
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tvProductReducedPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvProductTitle"
+                android:background="@drawable/strike_through"
+                android:layout_alignBottom="@+id/tvProductPrice"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:gravity="left|center_vertical|center_horizontal"
+                android:padding="2dp"
+                android:text="$1"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tvProductTitle"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:gravity="start|center_vertical|center_horizontal"
+                android:padding="2dp"
+                android:text="$1"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvProductDescription"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_below="@+id/tvProductPrice"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:padding="2dp"-->
+                <!--android:ellipsize="end"-->
+                <!--android:maxLines="3"-->
+                <!--android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."-->
+                <!--android:textColor="@color/gray"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textStyle="bold" />-->
 
 
         </RelativeLayout>
-    </android.support.v7.widget.CardView>
 
-</LinearLayout>
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

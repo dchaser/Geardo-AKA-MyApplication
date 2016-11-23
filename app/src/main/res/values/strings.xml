@@ -5,20 +5,25 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="search_main_activity_toolbar">Search</string>
+    <string name="search_main_activity_toolbar">Search Geardo</string>
     <string name="latest">LATEST</string>
     <string name="most_viewed">MOST VIEWED</string>
     <string name="trendy">TRENDY</string>
     <string name="on_sale">ON SALE</string>
     <string name="related">RELATED</string>
     <string name="overview">OVERVIEW</string>
-    <string name="search_hint">search</string>
+    <string name="search_hint">search Geardo</string>
     <string name="action_empty">Empty Cart</string>
     <string name="action_small">Small Grid</string>
     <string name="action_medium">Medium Grid</string>
     <string name="action_large">Large Grid</string>
     <string name="action_scroll_zero">Scroll Home</string>
     <string name="action_smooth_zero">Smooth Scroll Home</string>
+    <string name="home">Home</string>
+    <string name="categories">Categories</string>
+    <string name="search">Search</string>
+    <string name="cart">Cart</string>
+    <string name="account">Account</string>
     <string-array name="tabs">
         <item>LATEST</item>
         <item>MOST VIEWED</item>

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="au.com.slidenerdnavdrawer.staggeredgridlayout.RecyclerFragment">
+    tools:context="au.com.slidenerdnavdrawer.au.com.geardoaustralia.staggeredgridlayout.RecyclerFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/section_list"

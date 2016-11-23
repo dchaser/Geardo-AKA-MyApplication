@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/catToolbar"
+        layout="@layout/category_app_bar" />
+
+    <android.support.v4.widget.DrawerLayout
+
+        android:id="@+id/activity_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/categoryRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/fragment_navigation_drawer_id"
+            android:name="au.com.geardoaustralia.categories.NDFragment"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:fitsSystemWindows="true"
+            app:layout="@layout/fragment_nd_fragment"
+            tools:layout='@layout/fragment_nd_fragment' />
+
+    </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>

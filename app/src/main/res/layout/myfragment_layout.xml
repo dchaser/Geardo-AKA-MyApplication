@@ -4,86 +4,103 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <android.support.v4.view.ViewPager
         android:id="@+id/vpBanner"
         android:layout_width="match_parent"
+        android:layout_height="170dp"
         android:layout_alignParentTop="true"
-        android:layout_height="200dp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/imgViewThreeDots"
+        android:layout_alignBottom="@+id/vpBanner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/app_name"
+        android:paddingTop="5dp"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_recycler_view"
-        android:layout_below="@+id/vpBanner"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+    android:id="@+id/rv_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/vpBanner"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true" />
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/bottomToolbar"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray">
+        android:background="@color/white"
+        android:layout_alignParentBottom="true">
 
         <!--Button bar bottom-->
         <LinearLayout
             android:layout_width="match_parent"
             android:weightSum="5"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_alignParentBottom="true"
-            android:gravity="center|bottom"
             android:orientation="horizontal" >
 
             <!--Home-->
             <LinearLayout
+                android:duplicateParentState="true"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:id="@+id/ivHome"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     android:layout_gravity="center_horizontal"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/home"/>
+                    android:background="@drawable/button_effect_home"/>
 
                 <TextView
+                    android:id="@+id/tvHome"
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="10dp"
                     android:gravity="center_horizontal"
+                    android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"
                     android:textSize="10sp"
-                    android:text="Home"/>
+                    android:text="@string/home"/>
 
 
             </LinearLayout>
 
             <!--Categories-->
             <LinearLayout
+                android:id="@+id/llCats"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:id="@+id/ivCats"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     android:layout_gravity="center_horizontal"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/categories"/>
+                    android:background="@drawable/button_effect_categories"/>
 
                 <TextView
+                    android:id="@+id/tvCats"
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="10dp"
                     android:gravity="center_horizontal"
+                    android:textColor="@drawable/textview_effect_blue"
                     android:layout_gravity="center_horizontal"
                     android:textSize="10sp"
-                    android:text="Categories"/>
+                    android:text="@string/categories"/>
 
 
             </LinearLayout>
@@ -96,21 +113,23 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:id="@+id/ivSearch"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     android:layout_gravity="center_horizontal"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_search_gray_18dp"/>
+                    android:background="@drawable/button_effect_search"/>
 
                 <TextView
+                    android:id="@+id/tvSearch"
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="10dp"
                     android:gravity="center_horizontal"
+                    android:textColor="@drawable/textview_effect_blue"
                     android:layout_gravity="center_horizontal"
                     android:textSize="10sp"
-                    android:text="Search"/>
+                    android:text="@string/search"/>
 
 
             </LinearLayout>
@@ -123,21 +142,23 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:id="@+id/ivCart"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     android:layout_gravity="center_horizontal"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/cart"/>
+                    android:background="@drawable/button_effect_cart"/>
 
                 <TextView
+                    android:id="@+id/tvCart"
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="10dp"
                     android:gravity="center_horizontal"
+                    android:textColor="@drawable/textview_effect_blue"
                     android:layout_gravity="center_horizontal"
                     android:textSize="10sp"
-                    android:text="Cart"/>
+                    android:text="@string/cart"/>
 
 
             </LinearLayout>
@@ -150,27 +171,34 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:id="@+id/ivAccount"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     android:layout_gravity="center_horizontal"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/account"/>
+                    android:background="@drawable/button_effect_account"/>
 
                 <TextView
+                    android:id="@+id/tvAccount"
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="10dp"
                     android:gravity="center_horizontal"
+                    android:textColor="@drawable/textview_effect_blue"
                     android:layout_gravity="center_horizontal"
                     android:textSize="10sp"
-                    android:text="Account"/>
+                    android:text="@string/account"/>
 
 
             </LinearLayout>
+
         </LinearLayout>
 
 
         </android.support.v7.widget.Toolbar>
+
+
+
+
 </RelativeLayout>
 

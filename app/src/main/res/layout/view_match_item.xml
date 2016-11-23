@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<au.com.slidenerdnavdrawer.staggeredgridlayout.GameItemView
+<au.com.geardoaustralia.staggeredgridlayout.GameItemView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical|center_horizontal"
     android:minWidth="@dimen/card_min_width"
     android:padding="8dp">
 
@@ -15,4 +16,4 @@
         android:layout_row="1"
         android:src="@mipmap/ic_launcher"/>
 
-</au.com.slidenerdnavdrawer.staggeredgridlayout.GameItemView>
+</au.com.geardoaustralia.staggeredgridlayout.GameItemView>

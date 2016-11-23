@@ -49,9 +49,9 @@
             android:id="@+id/fragment_navigation_drawer"
             android:layout_width="280dp"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
+            android:layout_gravity="left|start"
             android:fitsSystemWindows="true"
-            android:name="au.com.slidenerdnavdrawer.MainScreen.NavdrawerMainActivity.NavigationDrawerFragment"
+            android:name="au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerFragment"
             tools:layout='@layout/fragment_navigation_drawer'
             app:layout="@layout/fragment_navigation_drawer"/>
 
