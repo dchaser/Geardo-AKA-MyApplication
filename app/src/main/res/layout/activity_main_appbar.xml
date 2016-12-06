@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <android.support.v4.widget.DrawerLayout
-
-        android:layout_height="match_parent"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:id="@+id/drawer_layout">
-
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true">
 
 
         <LinearLayout
@@ -24,37 +21,212 @@
 
             <include
                 android:id="@+id/appToolBar"
-                layout="@layout/app_bar"/>
+                layout="@layout/app_bar" />
 
             <!-- for Text Tabs -->
-            <it.neokree.materialtabs.MaterialTabHost
-                android:id="@+id/materialTabHost"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                app:textColor="#FFFFFF"
-                app:primaryColor="@color/primaryColor"
-                app:accentColor="#ffc400"
-                app:hasIcons="false"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/tabHost" />
+                <it.neokree.materialtabs.MaterialTabHost
+                    android:id="@+id/materialTabHost"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/iv_width_prodcut_page"
+                    app:accentColor="#ffc400"
+                    app:hasIcons="false"
+                    app:primaryColor="@color/primaryColor"
+                    app:textColor="#FFFFFF" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <fragment
+            android:id="@+id/fragment_navigation_drawer"
+            android:name="au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerFragment"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:layout="@layout/fragment_navigation_drawer"
+            tools:layout='@layout/fragment_navigation_drawer' />
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+    <!--Button bar bottom-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <!--Home-->
+        <LinearLayout
+            android:id="@+id/llHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:duplicateParentState="true"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ivHome"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_effect_home"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvHome"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/home"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
 
 
         </LinearLayout>
 
-        <fragment
-            android:id="@+id/fragment_navigation_drawer"
-            android:layout_width="280dp"
+        <!--Categories-->
+        <LinearLayout
+            android:id="@+id/llCats"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_gravity="left|start"
-            android:fitsSystemWindows="true"
-            android:name="au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerFragment"
-            tools:layout='@layout/fragment_navigation_drawer'
-            app:layout="@layout/fragment_navigation_drawer"/>
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    </android.support.v4.widget.DrawerLayout>
+            <ImageButton
+                android:id="@+id/ivCats"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_effect_categories"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/tvCats"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/categories"
+                android:textColor="@drawable/textview_effect_blue"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+
+        </LinearLayout>
+
+        <!--Search-->
+        <LinearLayout
+            android:id="@+id/llDeals"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ivDeals"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_effect_search"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvDeals"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/deals"
+                android:textColor="@drawable/textview_effect_blue"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+
+        </LinearLayout>
+
+        <!--Cart-->
+        <LinearLayout
+            android:id="@+id/llCart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ivCart"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_effect_cart"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvCart"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/cart"
+                android:textColor="@drawable/textview_effect_blue"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+
+        </LinearLayout>
+
+        <!--Account-->
+        <LinearLayout
+            android:id="@+id/llAccount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ivAccount"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_effect_account"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/account"
+                android:textColor="@drawable/textview_effect_blue"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

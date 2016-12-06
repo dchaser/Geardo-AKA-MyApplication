@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import au.com.geardoaustralia.MainActivity;
+import au.com.geardoaustralia.R;
 import au.com.geardoaustralia.utils.utilKit;
 
 /**
@@ -20,6 +21,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.splash_screen_layout);
 
         if (utilKit.isNetworkAvailable(this)) {
 

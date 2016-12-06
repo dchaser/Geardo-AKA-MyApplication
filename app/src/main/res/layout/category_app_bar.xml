@@ -34,7 +34,7 @@
             android:layout_marginStart="4dp"
             android:textColor="@color/gray"
             android:textColorHint="@color/gray"
-            android:drawableLeft="@drawable/ic_search_grey"
+            android:drawableLeft="@drawable/ic_search_gray_18dp"
             android:background="@android:color/transparent"
             android:hint="Search Geardo" />
 
@@ -44,7 +44,7 @@
             android:layout_height="30dp"
             android:layout_marginEnd="2dp"
             android:layout_marginRight="2dp"
-            android:background="@drawable/ic_cart_grey"
+            android:background="@drawable/ic_cart_grey_cats"
             android:scaleType="centerInside"
             android:text="click me" />
 

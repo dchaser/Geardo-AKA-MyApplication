@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/catToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primaryColorDark"
+    android:minHeight="?attr/actionBarSize"
+    android:paddingTop="@dimen/app_bar_top_padding"
+    app:theme="@style/ToolbarColoredBackArrow"
+    app:titleTextColor="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <ImageButton
+                android:id="@+id/ivHamburger"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_hamburger"
+                android:scaleType="centerInside"
+                android:text="click me" />
+
+            <EditText
+                android:id="@+id/etSearchMe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
+                android:theme="@style/RobotoTextViewStyle"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_search_grey"
+                android:hint="Search Geardo"
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray" />
+
+            <ImageButton
+                android:id="@+id/ivCart"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@drawable/ic_cart_grey"
+                android:scaleType="centerInside"
+                android:text="click me" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>

@@ -1,6 +1,8 @@
 package au.com.geardoaustralia.categories;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +59,11 @@ public class NDFragment extends Fragment {
             @Override
             public void subCategoryClicked(View v, int position, Bundle batton) {
 
-                Toast.makeText(getActivity(), "Sub Cat Clicked "+position, Toast.LENGTH_SHORT).show();
+                // intent to Sort and Refine screen
+                Intent toSortScreen = new Intent(getActivity(), SortAndRefinerScreen.class);
+                toSortScreen.putExtra("subcat", position);
+                startActivity(toSortScreen);
+
 
             }
         });
@@ -77,6 +84,17 @@ public class NDFragment extends Fragment {
         adapter.notifyDataSetChanged();
 
         openDrawerExplicitly();
+
+        ListView lv = CategorySelectionScreen.lvCategories;
+        int size = lv.getChildCount();
+
+        for(int a = 0; a < size; a++){
+
+            if(a != CategorySelectionScreen.selectedPos){
+                lv.getChildAt(a).setBackgroundColor(Color.WHITE);
+            }
+        }
+
 
     }
 

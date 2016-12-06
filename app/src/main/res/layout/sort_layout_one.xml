@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="wrap_content"
+    android:layout_height="200dp"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:elevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/ivProductTumbnailImage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.45"
+            android:scaleType="centerInside"
+            android:src="@drawable/dualcarcharger" />
+
+        <RelativeLayout
+            android:id="@+id/rlTAndPrice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.55">
+
+            <TextView
+                android:id="@+id/tvPTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
+                android:paddingRight="0dp"
+                android:paddingEnd="0dp"
+                android:text="Xiaomi 10000mAh Power Bank"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+
+            <TextView
+                android:id="@+id/tvFShipping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvPPrice"
+                android:layout_centerInParent="true"
+                android:paddingRight="0dp"
+                android:paddingEnd="0dp"
+                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:text="free shipping"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tvFShipping"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:id="@+id/tvOrders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:text="4 Orders | "
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:theme="@style/RobotoTextViewStyle" />
+
+                <TextView
+                    android:id="@+id/tvMinOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvRating"
+                    android:text="5.0 Rating"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:theme="@style/RobotoTextViewStyle" />
+
+                <ToggleButton
+                    android:id="@+id/tbFavorite"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/check"
+                    android:padding="5dp"
+                    android:scaleType="centerInside"
+                    android:textOff=""
+                    android:textOn="" />
+
+                <TextView
+                    android:id="@+id/tvRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/tvOrders"
+                    android:layout_toRightOf="@+id/tvOrders"
+                    android:paddingTop="5dp"
+                    android:text="5.0 Rating"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:theme="@style/RobotoTextViewStyle" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvPPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvPTitle"
+                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
+                android:paddingRight="0dp"
+                android:paddingEnd="0dp"
+                android:paddingTop="30dp"
+                android:text="AUS $31.52 - 34.90"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:theme="@style/RobotoBold" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/relativelayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone">-->
+
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivProductImage"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:scaleType="centerInside"-->
+            <!--android:src="@drawable/xiaomi_power_bank" />-->
+
+        <!--<ToggleButton-->
+            <!--android:id="@+id/ibFavorite"-->
+            <!--android:layout_width="25dp"-->
+            <!--android:layout_height="35dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_toRightOf="@+id/ivProductImage"-->
+            <!--android:background="@drawable/check"-->
+            <!--android:textOff=""-->
+            <!--android:textOn="" />-->
+
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@id/ivProductImage"-->
+            <!--android:layout_alignEnd="@id/ivProductImage"-->
+            <!--android:layout_alignLeft="@id/ivProductImage"-->
+            <!--android:layout_alignRight="@id/ivProductImage"-->
+            <!--android:layout_alignStart="@id/ivProductImage"-->
+            <!--android:alpha="0.6"-->
+            <!--android:background="@color/black">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvProductTitle"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="Xiaomi 10000mAh Power Bank"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:theme="@style/RobotoTextViewStyle" />-->
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvProductReducedPrice"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignBottom="@+id/tvProductPrice"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_below="@+id/tvProductTitle"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:background="@drawable/strike_through"-->
+                <!--android:gravity="left|center_vertical|center_horizontal"-->
+                <!--android:padding="2dp"-->
+                <!--android:text="$1"-->
+                <!--android:textColor="@color/red"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:theme="@style/RobotoTextViewStyle" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvProductPrice"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_below="@+id/tvProductTitle"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:gravity="start|center_vertical|center_horizontal"-->
+                <!--android:padding="2dp"-->
+                <!--android:text="$1"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="15sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:theme="@style/RobotoTextViewStyle" />-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/tvProductDescription"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_below="@+id/tvProductPrice"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_centerInParent="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:padding="2dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:ellipsize="end"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:maxLines="3"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="@color/gray"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="12sp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textStyle="bold" />&ndash;&gt;-->
+
+
+        <!--</RelativeLayout>-->
+
+
+    <!--</RelativeLayout>-->
+
+
+</android.support.v7.widget.CardView>

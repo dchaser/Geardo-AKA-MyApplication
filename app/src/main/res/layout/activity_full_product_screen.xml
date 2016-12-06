@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/appToolBarSubActivity"
-        layout="@layout/app_bar" />
-
-    <it.neokree.materialtabs.MaterialTabHost
-        android:id="@+id/mTabHost"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        app:textColor="#FFFFFF"
-        app:primaryColor="@color/primaryColor"
-        app:accentColor="#ffc400"
-        app:hasIcons="false"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/mPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <include
+            android:id="@+id/appToolBarSubActivity"
+            layout="@layout/app_bar" />
+
+        <it.neokree.materialtabs.MaterialTabHost
+            android:id="@+id/mTabHost"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:accentColor="#ffc400"
+            app:hasIcons="false"
+            app:primaryColor="@color/primaryColor"
+            app:textColor="#FFFFFF" />
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/mPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabAddToCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_add_shopping_cart_white_48dp"
+                app:fabSize="mini"
+                app:layout_anchorGravity="bottom|right|end" />
+
+        </android.support.design.widget.CoordinatorLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/bottom_sheet_main" />
+
+</android.support.design.widget.CoordinatorLayout>

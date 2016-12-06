@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#212121" >
+
+    <!--<PreferenceCategory-->
+        <!--android:layout="@layout/topcat"-->
+        <!--android:textSize="12px" >-->
+        <!--<SwitchPreference-->
+            <!--android:key="pref_isLocationEnabled"-->
+            <!--android:summary="@string/txtPrefLocationSummary"-->
+            <!--android:title="@string/txtPrefLocationTitle" />-->
+    <!--</PreferenceCategory>-->
+    <!--<PreferenceCategory-->
+        <!--android:layout="@layout/line"-->
+        <!--android:textSize="12px"-->
+        <!--android:title=" " >-->
+        <!--<ListPreference-->
+            <!--android:key="pref_text"-->
+            <!--android:selectable="false"-->
+            <!--android:summary="@string/txtPrefTextListSummary"-->
+            <!--android:title="@string/txtPrefTextListTitle" />-->
+    <!--</PreferenceCategory>-->
+
+</PreferenceScreen>

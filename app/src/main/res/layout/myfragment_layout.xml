@@ -1,204 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vpBanner"
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:id="@+id/imgViewThreeDots"
-        android:layout_alignBottom="@+id/vpBanner"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/app_name"
-        android:paddingTop="5dp"/>
-
-    <android.support.v7.widget.RecyclerView
-    android:id="@+id/rv_recycler_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/vpBanner"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true" />
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants">
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/bottomToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_alignParentBottom="true">
-
-        <!--Button bar bottom-->
-        <LinearLayout
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpBanner"
             android:layout_width="match_parent"
-            android:weightSum="5"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal" >
-
-            <!--Home-->
-            <LinearLayout
-                android:duplicateParentState="true"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/ivHome"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_effect_home"/>
-
-                <TextView
-                    android:id="@+id/tvHome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="10sp"
-                    android:text="@string/home"/>
+            android:layout_height="170dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
 
-            </LinearLayout>
+        <ImageView
+            android:id="@+id/imgViewThreeDots"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/vpBanner"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/app_name"
+            android:paddingTop="5dp" />
 
-            <!--Categories-->
-            <LinearLayout
-                android:id="@+id/llCats"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+    <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:id="@+id/nsv"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
-                <ImageButton
-                    android:id="@+id/ivCats"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_effect_categories"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/vpBanner" />
 
-                <TextView
-                    android:id="@+id/tvCats"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:gravity="center_horizontal"
-                    android:textColor="@drawable/textview_effect_blue"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="10sp"
-                    android:text="@string/categories"/>
-
-
-            </LinearLayout>
-
-            <!--Search-->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/ivSearch"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_effect_search"/>
-
-                <TextView
-                    android:id="@+id/tvSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:gravity="center_horizontal"
-                    android:textColor="@drawable/textview_effect_blue"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="10sp"
-                    android:text="@string/search"/>
-
-
-            </LinearLayout>
-
-            <!--Cart-->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/ivCart"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_effect_cart"/>
-
-                <TextView
-                    android:id="@+id/tvCart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:gravity="center_horizontal"
-                    android:textColor="@drawable/textview_effect_blue"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="10sp"
-                    android:text="@string/cart"/>
-
-
-            </LinearLayout>
-
-            <!--Account-->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/ivAccount"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_effect_account"/>
-
-                <TextView
-                    android:id="@+id/tvAccount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:gravity="center_horizontal"
-                    android:textColor="@drawable/textview_effect_blue"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="10sp"
-                    android:text="@string/account"/>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        </android.support.v7.widget.Toolbar>
-
-
-
-
-</RelativeLayout>
+    <!--</android.support.v4.widget.NestedScrollView>-->
+    </RelativeLayout>
 

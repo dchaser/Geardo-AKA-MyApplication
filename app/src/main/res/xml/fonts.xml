@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<familyset>
+
+    <!-- Font with all four styles defined -->
+    <family>
+        <nameset>
+            <name>sans-serif-light</name>
+            <name>rb_bold</name>
+            <name>rb_italic</name>
+            <name>rb_bolditalic</name>
+        </nameset>
+        <fileset>
+            <file>Roboto-Regular.ttf</file>
+            <file>Roboto-Bold.ttf</file>
+            <file>Roboto-Light.ttf</file>
+            <file>Roboto-BoldItalic.ttf</file>
+        </fileset>
+    </family>
+
+</familyset>

@@ -2,6 +2,7 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,6 +18,7 @@
             android:orientation="vertical"
             android:weightSum="1">
 
+
             <!--Gallery View Pager-->
             <LinearLayout
                 android:id="@+id/rlMainGalleryView"
@@ -27,39 +29,59 @@
                 android:weightSum="1">
 
 
-                <RelativeLayout
+                <android.support.design.widget.CoordinatorLayout
+                    android:id="@+id/main_content"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:context="au.com.geardoaustralia.FullProductScreen.FullProductPage">
+                    android:layout_height="match_parent">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/gallery_recycler_view"
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="vertical" />
+                        android:layout_height="match_parent"
+                        tools:context="au.com.geardoaustralia.FullProductScreen.FullProductPage">
 
-                    <TextView
-                        android:id="@+id/tvImgCount"
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/gallery_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="vertical" />
+
+                        <TextView
+                            android:id="@+id/tvImgCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:alpha="0.5"
+                            android:background="@drawable/rounded_corner"
+                            android:drawableEnd="@drawable/ic_chevron_right_white_18dp"
+                            android:drawableLeft="@drawable/ic_perm_media_white_18dp"
+                            android:drawableRight="@drawable/ic_chevron_right_white_18dp"
+                            android:drawableStart="@drawable/ic_perm_media_white_18dp"
+                            android:padding="8dp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+
+                    </RelativeLayout>
+
+
+                    <android.support.design.widget.FloatingActionButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginRight="10dp"
-                        android:alpha="0.6"
-                        android:background="@drawable/rounded_corner"
-                        android:drawableEnd="@drawable/ic_chevron_right_white_18dp"
-                        android:drawableLeft="@drawable/ic_perm_media_white_18dp"
-                        android:drawablePadding="10dp"
-                        android:drawableRight="@drawable/ic_chevron_right_white_18dp"
-                        android:drawableStart="@drawable/ic_perm_media_white_18dp"
-                        android:padding="5dp"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                        android:layout_gravity="bottom|right"
+                        android:id="@+id/icAddToWishListt"
+                        app:backgroundTint="@color/orange"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/ic_heart_grey"
+                        app:fabSize="auto"
+                        app:layout_anchorGravity="bottom|right|end" />
 
-                </RelativeLayout>
+                </android.support.design.widget.CoordinatorLayout>
 
 
             </LinearLayout>
@@ -184,7 +206,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/bottomToolbar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:alpha="0.7"
         android:background="@color/black">
@@ -235,18 +257,14 @@
                 android:orientation="horizontal">
 
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_favorite_border_orange_48dp" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@color/lightorange"
                     android:text="BUY"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

@@ -13,7 +13,7 @@
     tools:context="au.com.slidenerdnavdrawer.au.com.geardoaustralia.MainActivity">
 
 <include
-    android:id="@+id/appToolBar"
+    android:id="@+id/appToolBarMainScreen"
     layout="@layout/app_bar"/>
 
 

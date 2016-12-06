@@ -2,6 +2,7 @@ package au.com.geardoaustralia.MainScreen.NavdrawerMainActivity;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,9 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import au.com.geardoaustralia.MainScreen.profile.ProfileScreen;
 import au.com.geardoaustralia.R;
 
 
@@ -39,6 +44,9 @@ public class NavigationDrawerFragment extends Fragment implements DasunsAdapter.
 
     private View containerView;
 
+    RelativeLayout rlProfileArea;
+    TextView tvName;
+    com.github.siyamed.shapeimageview.CircularImageView civProfileImage;
 
     public NavigationDrawerFragment() {
         // Required empty public constructor
@@ -61,6 +69,16 @@ public class NavigationDrawerFragment extends Fragment implements DasunsAdapter.
 
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
+        //profile area stuff
+        rlProfileArea = (RelativeLayout) layout.findViewById(R.id.rlProfileArea);
+        rlProfileArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getActivity(), ProfileScreen.class));
+            }
+        });
+
         //setup recycler view for the Navigation Drawer
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawer_list);
         dasunsAdapter = new DasunsAdapter(getActivity(), getData());
@@ -75,16 +93,17 @@ public class NavigationDrawerFragment extends Fragment implements DasunsAdapter.
 
     public static List<Information> getData(){
 
+
+
         //build an arraylist of Information
         List<Information> data = new ArrayList<>();
 
-        int[] icons = {R.drawable.ic_apps_black_48dp, R.drawable.ic_border_inner_black_48dp, R.drawable.ic_attach_money_black_48dp, R.drawable.ic_unfold_more_black_48dp};
-        String[] titles = {"Cart","Login", "About Us", "Contact Us", "My Profile"};
+        int[] icons = {R.drawable.ic_cart_grey, R.drawable.ic_account_blue, R.drawable.ic_store_grey, R.drawable.ic_attach_money_black_48dp,R.drawable.ic_cart_grey, R.drawable.ic_account_blue, R.drawable.ic_store_grey, R.drawable.ic_attach_money_black_48dp,R.drawable.ic_cart_grey, R.drawable.ic_account_blue, R.drawable.ic_store_grey, R.drawable.ic_attach_money_black_48dp};
+        String[] titles = {"Cart","Login", "About Us", "Contact Us", "My Profile", "Corporate Gifts", "Privacy Policy" , "Shipping Policy" , "Terms & Conditions",  "Help & FAQs", "Order Returns" , "Help Us Improve"};
 
         //icons.length && i< titles.length;
 
-        for(int i = 0; i < 10; i++){
-
+        for(int i = 0; i < 12; i++){
             Information current = new Information();
 
             current.iconId = icons[i%icons.length];

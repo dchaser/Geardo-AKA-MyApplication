@@ -68,7 +68,7 @@ public class DasunsAdapter extends RecyclerView.Adapter<DasunsAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return 100;
+        return 12;
     }
 
     public void setClickListener(ClickListener clickListener){

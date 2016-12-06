@@ -3,11 +3,21 @@ package au.com.geardoaustralia.MainScreen.MainContentMainActivity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import io.realm.RealmObject;
+import io.realm.annotations.Index;
+
 /**
  * Created by DasunPC on 11/3/16.
  */
 
 public class ProductInfoModel implements Parcelable {
+
+    //@Index
+    //@com.google.gson.annotations.SerializedName("id")
+    //public int localId;
+
+    //@com.google.gson.annotations.SerializedName("cloudProductId")
+   // public String cloudId;
 
     @com.google.gson.annotations.SerializedName("title")
     public  String Title;
@@ -21,6 +31,14 @@ public class ProductInfoModel implements Parcelable {
     public String descriptionl;
 
     public ProductInfoModel() {
+    }
+
+    public ProductInfoModel(String title, int thumnailUrl, String reducedPrice, String price, String descriptionl) {
+        Title = title;
+        this.thumnailUrl = thumnailUrl;
+        this.reducedPrice = reducedPrice;
+        this.price = price;
+        this.descriptionl = descriptionl;
     }
 
     // parcelable contents
