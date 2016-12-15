@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import au.com.geardoaustralia.R;
+//http://www.androidhive.info/2016/06/android-getting-started-firebase-simple-login-registration-auth/
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
@@ -70,5 +71,4 @@ public class ResetPasswordActivity extends AppCompatActivity {
             }
         });
     }
-
 }

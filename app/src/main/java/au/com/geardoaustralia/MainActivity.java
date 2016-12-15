@@ -28,22 +28,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.SearchView;
+import android.view.animation.AlphaAnimation;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.Tricks.ViewPagerEx;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import au.com.geardoaustralia.MainScreen.MainContentMainActivity.ProductInfoModel;
 import au.com.geardoaustralia.FullProductScreen.FullProductPage;
 import au.com.geardoaustralia.MainScreen.MainContentMainActivity.VpBannerAdapter;
 import au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerFragment;
+import au.com.geardoaustralia.MainScreen.profile.ProfileScreen;
 import au.com.geardoaustralia.cart.ViewCartPopup;
 import au.com.geardoaustralia.categories.CategorySelectionScreen;
+import au.com.geardoaustralia.utils.EndlessRecyclerViewScrollListener;
 import au.com.geardoaustralia.utils.GlobalContext;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -462,7 +474,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
                 //set page number in App class
                 globalContext.selectedPage = 3;
                 clearAll(globalContext.selectedPage);
-                // startActivity(new Intent(MainActivity.this, AccountScreen.class));
+                startActivity(new Intent(MainActivity.this, ProfileScreen.class));
 
             }
         });
@@ -608,12 +620,11 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
     }
 
-    public static class MyFragment extends Fragment implements ListenerOfClicks {
+    public static class MyFragment extends Fragment implements ListenerOfClicks, BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
         private RecyclerView rv;
-        private ViewPager vpBanner;
-        private ImageView imgViewThreeDots;
-
+        private SliderLayout mDemoSlider;
+        private EndlessRecyclerViewScrollListener scrollListener;
 
         //constructor
         public static MyFragment getInstance(int posiiton) {
@@ -625,6 +636,15 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
             return myFragment;
         }
 
+
+        @Override
+        public void onStop() {
+            //do this firstly before the fragment is destroyed i order to prevent a memory leak
+            mDemoSlider.stopAutoCycle();
+            super.onStop();
+        }
+
+
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View layout = inflater.inflate(R.layout.myfragment_layout, container, false);
@@ -632,33 +652,14 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
             Bundle bundle = getArguments();
             setHasOptionsMenu(true);
 
-//            if (bundle != null) {
-//
-//                // tvPosition.setText("The page selected is " + bundle.getInt("position"));
-//            }
+            mDemoSlider = (SliderLayout) layout.findViewById(R.id.slider);
+            initiateImageSlider();
 
-            imgViewThreeDots = (ImageView) layout.findViewById(R.id.imgViewThreeDots);
-            //setup banner on top of each fragment
-            vpBanner = (ViewPager) layout.findViewById(R.id.vpBanner);
-            VpBannerAdapter vpBannerAdapter = new VpBannerAdapter(getContext());
-            vpBanner.setAdapter(vpBannerAdapter);
-            vpBanner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                }
-
-                @Override
-                public void onPageSelected(int page) {
-                    ChangeThreeDotsImage(page);
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-
-                }
-            });
-            ChangeThreeDotsImage(vpBanner.getCurrentItem());
+            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
+            mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+            mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+            mDemoSlider.setDuration(4000);
+            mDemoSlider.addOnPageChangeListener(this);
 
             //setup recyccler view
             rv = (RecyclerView) layout.findViewById(R.id.rv_recycler_view);
@@ -669,34 +670,105 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
             rv.setAdapter(adapter);
             final GridLayoutManager llm = new GridLayoutManager(getContext(), 2);
             rv.setLayoutManager(llm);
+            scrollListener = new EndlessRecyclerViewScrollListener(llm) {
+                @Override
+                public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                    // Triggered only when new data needs to be appended to the list
+                    // Add whatever code is needed to append new items to the bottom of the list
+                    loadNextDataFromApi(page);
+                }
+            };
+            // Adds the scroll listener to RecyclerView
+            rv.addOnScrollListener(scrollListener);
+            rv.setOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    switch (newState) {
+                        case RecyclerView.SCROLL_STATE_IDLE:
+                            System.out.println("The RecyclerView is not scrolling");
+                            break;
+                        case RecyclerView.SCROLL_STATE_DRAGGING:
+                            System.out.println("Scrolling now");
+                            break;
+                        case RecyclerView.SCROLL_STATE_SETTLING:
+                            System.out.println("Scroll Settling");
+                            break;
+
+                    }
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if(dx>0)
+                    {
+                       // System.out.println("Scrolled Right");
+
+                    }
+                    else if(dx < 0)
+                    {
+                       // System.out.println("Scrolled Left");
+
+                    }
+                    else {
+
+                      //  System.out.println("No Horizontal Scrolled");
+                    }
+
+                    if(dy>0)
+                    {
+                       // System.out.println("Scrolled Downwards");
+                    }
+                    else if(dy < 0)
+                    {
+                       // System.out.println("Scrolled Upwards");
+
+                    }
+                    else {
+
+                      //  System.out.println("No Vertical Scrolled");
+                    }
+                }
+            });
             return layout;
         }
 
-        private void ChangeThreeDotsImage(int vpItem) {
-
-
-            switch (vpItem) {
-                case 0:
-                    Drawable swipe_1 = getActivity().getResources().getDrawable(
-                            R.drawable.pride_swipe_1_enabled);
-                    imgViewThreeDots.setImageDrawable(swipe_1);
-                    break;
-
-                case 1:
-                    Drawable swipe_2 = getActivity().getResources().getDrawable(
-                            R.drawable.pride_swipe_2_enabled);
-                    imgViewThreeDots.setImageDrawable(swipe_2);
-                    break;
-
-                case 2:
-                    Drawable swipe_3 = getActivity().getResources().getDrawable(
-                            R.drawable.pride_swipe_3_enabled);
-                    imgViewThreeDots.setImageDrawable(swipe_3);
-                    break;
-
-            }
-
+        // Append the next page of data into the adapter
+        // This method probably sends out a network request and appends new data items to your adapter.
+        public void loadNextDataFromApi(int offset) {
+            Toast.makeText(getActivity(), "Loading Next Batch..No data", Toast.LENGTH_SHORT).show();
+            // Send an API request to retrieve appropriate paginated data
+            //  --> Send the request including an offset value (i.e `page`) as a query parameter.
+            //  --> Deserialize and construct new model objects from the API response
+            //  --> Append the new data objects to the existing set of items inside the array of items
+            //  --> Notify the adapter of the new items made with `notifyDataSetChanged()`
         }
+
+        private void initiateImageSlider() {
+
+            HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
+            file_maps.put("Latest Designs", R.drawable.category_one);
+            file_maps.put("Cheap Prices", R.drawable.category_two);
+            file_maps.put("Great After Sales", R.drawable.category_three);
+            file_maps.put("Top Ratings", R.drawable.category_four);
+
+            for (String name : file_maps.keySet()) {
+                TextSliderView textSliderView = new TextSliderView(getActivity());
+                textSliderView
+                        .description(name)
+                        .image(file_maps.get(name))
+                        .setScaleType(BaseSliderView.ScaleType.Fit)
+                        .setOnSliderClickListener(this);
+
+                //add your extra information
+                textSliderView.bundle(new Bundle());
+                textSliderView.getBundle()
+                        .putString("extra", name);
+
+                mDemoSlider.addSlider(textSliderView);
+            }
+        }
+
+
 
 
         @Override
@@ -734,6 +806,25 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
         }
 
+        @Override
+        public void onSliderClick(BaseSliderView slider) {
+            Toast.makeText(getActivity(),slider.getBundle().get("extra") + "",Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
     }
 
 
@@ -746,7 +837,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
     private static class RVAdapter extends RecyclerView.Adapter<RVAdapter.ProductViewHolder> {
 
-
+        private final static int FADE_DURATION = 1000; // in milliseconds
         private List<ProductInfoModel> productList = new ArrayList<>();
         private MainActivity.ListenerOfClicks listenerOfClicks;
 
@@ -777,6 +868,14 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
             holder.tvProductReducedPrice.setText(productList.get(position).reducedPrice);
             holder.tvProductPrice.setText(productList.get(position).price);
             //holder.tvProductDescription.setText(productList.get(position).descriptionl);
+// Set the view to fade in
+            //setFadeAnimation(holder.card_view);
+        }
+
+        private void setFadeAnimation(View view) {
+            AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
+            anim.setDuration(FADE_DURATION);
+            view.startAnimation(anim);
         }
 
         @Override

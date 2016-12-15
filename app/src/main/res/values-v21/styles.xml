@@ -16,6 +16,7 @@
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif-light</item>
     </style>
+
     <style name="RobotoBold" parent="android:Widget.TextView">
         <item name="android:fontFamily" tools:targetApi="jelly_bean">rb_bold</item>
     </style>
@@ -46,10 +47,10 @@
         <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
     </style>
 
-    <style name="toggleButton"  parent="AppTheme.Base">
+    <style name="toggleButton" parent="AppTheme.Base">
         <item name="android:buttonStyleToggle">@style/Widget.Button.Toggle</item>
-        <item name="android:textOn"/>
-        <item name="android:textOff"/>
+        <item name="android:textOn" />
+        <item name="android:textOff" />
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>

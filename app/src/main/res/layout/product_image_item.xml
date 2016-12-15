@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/ivPrductThumb1"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_weight="0.5"
+        android:contentDescription="@string/account"
+        android:padding="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/dualcarcharger" />
+
+    <ImageView
+        android:id="@+id/ivPrductThumb2"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_weight="0.5"
+        android:contentDescription="@string/account"
+        android:padding="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/dualcarcharger" />
+
+
+</LinearLayout>

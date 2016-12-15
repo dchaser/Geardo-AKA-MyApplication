@@ -1,8 +1,8 @@
-package au.com.geardoaustralia.MainScreen.profile;
+package au.com.geardoaustralia.login;
+//http://www.androidhive.info/2016/06/android-getting-started-firebase-simple-login-registration-auth/
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,23 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerFragment;
 import au.com.geardoaustralia.R;
-import au.com.geardoaustralia.categories.CategorySelectionScreen;
-import au.com.geardoaustralia.categories.NDFragment;
-import au.com.geardoaustralia.categories.categoryModel;
-import au.com.geardoaustralia.login.LoginActivity;
-import au.com.geardoaustralia.login.LoginProcessStart;
-import au.com.geardoaustralia.login.SignupActivity;
-//http://www.androidhive.info/2016/06/android-getting-started-firebase-simple-login-registration-auth/
 
-public class ProfileScreen extends AppCompatActivity {
+public class LoginProcessStart extends AppCompatActivity {
 
-    private Toolbar toolbar;
-    private NavigationDrawerFragment drawerFragment;
 
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
             changeEmail, changePassword, sendEmail, remove, signOut;
@@ -46,21 +33,11 @@ public class ProfileScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_screen);
+        setContentView(R.layout.activity_login_process_start);
 
-        toolbar = (Toolbar) findViewById(R.id.profilePageToolBar);
-        //toolbar will automatically route to 'menu creation' onOptionsMenu is available
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(getString(R.string.app_name));
         setSupportActionBar(toolbar);
-        try {
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nav_drawer_profile);
-        drawerFragment.setUp(R.id.fragment_nav_drawer_profile, (DrawerLayout) findViewById(R.id.dlProfileScreen), toolbar);
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -75,7 +52,7 @@ public class ProfileScreen extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(ProfileScreen.this, LoginActivity.class));
+                    startActivity(new Intent(LoginProcessStart.this, LoginActivity.class));
                     finish();
                 }
             }
@@ -135,11 +112,11 @@ public class ProfileScreen extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(ProfileScreen.this, "Email address is updated. Please sign in with new email id!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginProcessStart.this, "Email address is updated. Please sign in with new email id!", Toast.LENGTH_LONG).show();
                                         signOut();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
-                                        Toast.makeText(ProfileScreen.this, "Failed to update email!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginProcessStart.this, "Failed to update email!", Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
@@ -179,11 +156,11 @@ public class ProfileScreen extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(ProfileScreen.this, "Password is updated, sign in with new password!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginProcessStart.this, "Password is updated, sign in with new password!", Toast.LENGTH_SHORT).show();
                                             signOut();
                                             progressBar.setVisibility(View.GONE);
                                         } else {
-                                            Toast.makeText(ProfileScreen.this, "Failed to update password!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginProcessStart.this, "Failed to update password!", Toast.LENGTH_SHORT).show();
                                             progressBar.setVisibility(View.GONE);
                                         }
                                     }
@@ -220,10 +197,10 @@ public class ProfileScreen extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(ProfileScreen.this, "Reset password email is sent!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginProcessStart.this, "Reset password email is sent!", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
-                                        Toast.makeText(ProfileScreen.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginProcessStart.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
@@ -245,12 +222,12 @@ public class ProfileScreen extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(ProfileScreen.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(ProfileScreen.this, SignupActivity.class));
+                                        Toast.makeText(LoginProcessStart.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(LoginProcessStart.this, SignupActivity.class));
                                         finish();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
-                                        Toast.makeText(ProfileScreen.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginProcessStart.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
@@ -292,5 +269,4 @@ public class ProfileScreen extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
-
 }
