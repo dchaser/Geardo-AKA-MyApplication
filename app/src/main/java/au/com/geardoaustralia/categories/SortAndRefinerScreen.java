@@ -1,5 +1,7 @@
 package au.com.geardoaustralia.categories;
 
+import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,9 +12,11 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -26,19 +30,25 @@ import android.widget.ToggleButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import au.com.geardoaustralia.MainActivity;
 import au.com.geardoaustralia.MainScreen.MainContentMainActivity.ProductInfoModel;
 import au.com.geardoaustralia.R;
+import au.com.geardoaustralia.cartNew.BaseActivity;
 import au.com.geardoaustralia.utils.GlobalContext;
+import au.com.geardoaustralia.utils.MenuBarHandler;
 import au.com.geardoaustralia.utils.utilKit;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
-public class SortAndRefinerScreen extends AppCompatActivity {
+public class SortAndRefinerScreen extends BaseActivity {
 
     Toolbar toolbar;
+    MenuBarHandler menuBarHandler;
     ImageButton ibGridAndLinear;
     TextView tvRefine;
     TextView tvSort;
+
+    private SortAndRefineDrawerFragment sortAndRefineDrawerFragment;
 
     RecyclerView subCatSorterRV;
     private static SortAndRefinerScreen.SubCatProductAdapter adapter;
@@ -66,9 +76,9 @@ public class SortAndRefinerScreen extends AppCompatActivity {
         Intent i = getIntent();
         String subcategory = i.getStringExtra("subcat");
 
-        toolbar = (Toolbar) findViewById(R.id.refineToolbar);
+        menuBarHandler = new MenuBarHandler(SortAndRefinerScreen.this);
+        toolbar = (Toolbar) findViewById(R.id.appToolBar);
         //toolbar will automatically route to menu creation onOptionsMenu is available
-        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //setup Sort/Refiner buttons and Recycler View UI grid changer button
@@ -150,12 +160,10 @@ public class SortAndRefinerScreen extends AppCompatActivity {
 
     }
 
-
     public interface ListenerToProductClicks {
 
         void productClicked(View v, int position, Bundle batton);
     }
-
 
     private static class SubCatProductAdapter extends RecyclerView.Adapter<SortAndRefinerScreen.SubCatProductAdapter.SubCetegoryViewHolder> implements Filterable {
 
@@ -441,12 +449,26 @@ public class SortAndRefinerScreen extends AppCompatActivity {
 
     }
 
-
     public static List<ProductInfoModel> getDataSet() {
 
         GlobalContext globalContext = GlobalContext.getInstance();
         globalContext.makeTestDataSet();
         return globalContext.data;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // MenuItem searchItem = menu.findItem(R.id.mSearch);
+
+        // searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        //this.menu = menu;
+        getMenuInflater().inflate(R.menu.home_act_filtered, menu);
+        searchView = (SearchView) menu.findItem(R.id.mSearch).getActionView();
+        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this,SortAndRefinerScreen.class)));
+
+        return true;
     }
 
 }

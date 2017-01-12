@@ -25,6 +25,7 @@
 
 
         <ImageView
+            android:id="@+id/ivProfilePhoto"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/logo_w_h"
             android:layout_gravity="center_horizontal"
@@ -117,25 +118,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:background="@color/grey_300"
                 android:gravity="center_vertical|center_horizontal">
 
                 <Button
-                    android:id="@+id/button_facebook_signout"
+                    android:id="@+id/btnFB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="@string/sign_out"
-                    android:theme="@style/ThemeOverlay.MyDarkButton"
-                    android:visibility="gone" />
+                    android:text="Facebook"
+                    android:theme="@style/ThemeOverlay.MyDarkButton" />
 
-                <com.facebook.login.widget.LoginButton
-                    android:id="@+id/button_facebook_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+
 
             </RelativeLayout>
 
@@ -146,21 +139,13 @@
                 android:gravity="center_vertical|center_horizontal">
 
                 <Button
-                    android:id="@+id/sign_out_button"
+                    android:id="@+id/btnGoogle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sign_out"
-                    android:theme="@style/ThemeOverlay.MyDarkButton" />
-
-
-                <com.google.android.gms.common.SignInButton
-                    android:id="@+id/sign_in_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:visibility="visible"
-                    tools:visibility="gone" />
-
+                    android:text="Google"
+                    android:theme="@style/ThemeOverlay.MyDarkButton"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
 
 
             </RelativeLayout>

@@ -17,9 +17,12 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -28,15 +31,28 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import au.com.geardoaustralia.MainActivity;
 import au.com.geardoaustralia.R;
+import au.com.geardoaustralia.utils.GlobalContext;
+import au.com.geardoaustralia.utils.utilKit;
 
 public class FacebookLoginActivity extends BaseActivity implements
         View.OnClickListener {
 
     private static final String TAG = "FacebookLogin";
 
+    private String fb_id = "fb_id";
+    private String fb_name = "fb_name";
+    private String fb_email = "fb_email";
+    private String fb_dob = "fb_dob";
+    private String fb_image_url = "fb_image_url";
+
     private TextView mStatusTextView;
     private TextView mDetailTextView;
+    private ProfilePictureView icon;
 
     // [START declare_auth]
     private FirebaseAuth auth;
@@ -54,14 +70,16 @@ public class FacebookLoginActivity extends BaseActivity implements
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_facebook);
 
+
         // Views
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
         findViewById(R.id.button_facebook_signout).setOnClickListener(this);
+        icon = (ProfilePictureView) findViewById(R.id.icon);
 
         // [START initialize_auth]
         // Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance();
+        auth = GlobalContext.getFAuthInstance();
         // [END initialize_auth]
 
         // [START auth_state_listener]
@@ -72,6 +90,7 @@ public class FacebookLoginActivity extends BaseActivity implements
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    updateUI(user);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -93,6 +112,39 @@ public class FacebookLoginActivity extends BaseActivity implements
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
+
+//                // App code
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.v("LoginActivity", response.toString());
+
+                                // Application code
+                                try {
+                                    String facebook_id = object.getString("id");
+                                    String name = object.getString("name");
+                                    String email = object.getString("email");
+
+                                    utilKit.saveToPreferences(FacebookLoginActivity.this, fb_id, facebook_id);
+                                    utilKit.saveToPreferences(FacebookLoginActivity.this, fb_name, name);
+                                    utilKit.saveToPreferences(FacebookLoginActivity.this, fb_email, email);
+                                    utilKit.saveToPreferences(FacebookLoginActivity.this, fb_image_url, facebook_id);
+
+//                                  set profile picture view
+                                    icon.setProfileId(facebook_id);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender,birthday");
+                request.setParameters(parameters);
+                request.executeAsync();
+
             }
 
             @Override
@@ -168,6 +220,8 @@ public class FacebookLoginActivity extends BaseActivity implements
 
                         // [START_EXCLUDE]
                         hideProgressDialog();
+                        startActivity(new Intent(FacebookLoginActivity.this, MainActivity.class));
+                        finish();
                         // [END_EXCLUDE]
                     }
                 });
@@ -187,13 +241,13 @@ public class FacebookLoginActivity extends BaseActivity implements
             mStatusTextView.setText(getString(R.string.facebook_status_fmt, user.getDisplayName()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
-            findViewById(R.id.button_facebook_login).setVisibility(View.GONE);
-            findViewById(R.id.button_facebook_signout).setVisibility(View.VISIBLE);
+            // findViewById(R.id.button_facebook_login).setVisibility(View.GONE);
+            //findViewById(R.id.button_facebook_signout).setVisibility(View.VISIBLE);
         } else {
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
 
-            findViewById(R.id.button_facebook_login).setVisibility(View.VISIBLE);
+            //  findViewById(R.id.button_facebook_login).setVisibility(View.VISIBLE);
             findViewById(R.id.button_facebook_signout).setVisibility(View.GONE);
         }
     }

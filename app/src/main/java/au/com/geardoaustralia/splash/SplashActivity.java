@@ -1,7 +1,6 @@
 package au.com.geardoaustralia.splash;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,40 +8,23 @@ import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.ListViewAutoScrollHelper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.siyamed.shapeimageview.CircularImageView;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,13 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import au.com.geardoaustralia.MainActivity;
-import au.com.geardoaustralia.MainScreen.MainContentMainActivity.ProductInfoModel;
-import au.com.geardoaustralia.MainScreen.profile.ProfileScreen;
 import au.com.geardoaustralia.R;
-import au.com.geardoaustralia.cart.SCClickListener;
-import au.com.geardoaustralia.cart.ShoppingCartHelper;
-import au.com.geardoaustralia.cart.ViewCartPopup;
-import au.com.geardoaustralia.gallery.Image;
 import au.com.geardoaustralia.login.LoginActivity;
 import au.com.geardoaustralia.login.SignupActivity;
 import au.com.geardoaustralia.utils.GlobalContext;
@@ -76,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
     private ListView lvAutoScroll;
     private ImageAdapter mAdapter;
 
-    final long totalScrollTime = 100000; //total scroll time. I think that 300 000 000 years is close enouth to infinity. if not enought you can restart timer in onFinish()
+    final long totalScrollTime = 100000; //total scroll time. I think that 300 000 000 years is close enough to infinity. if not enought you can restart timer in onFinish()
 
     final int scrollPeriod = 1000; // every 20 ms scoll will happened. smaller values for smoother
 
@@ -88,6 +64,9 @@ public class SplashActivity extends AppCompatActivity {
     Button btnCreateAccount;
     Button btnSignIn;
 
+    // [START declare_auth]
+    private FirebaseAuth auth;
+    // [END declare_auth]
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +74,13 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.splash_screen_layout);
         pDialog = new ProgressDialog(this);
         if (utilKit.isNetworkAvailable(this)) {
+
+            auth = GlobalContext.getFAuthInstance();
+
+            if (auth.getCurrentUser() != null) {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
+            }
 
             //initiate list view
             lvAutoScroll = (ListView) findViewById(R.id.lvAutoScroll);

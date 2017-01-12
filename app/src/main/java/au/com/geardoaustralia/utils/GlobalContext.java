@@ -1,6 +1,7 @@
 package au.com.geardoaustralia.utils;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -9,6 +10,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,7 +37,7 @@ public class GlobalContext extends Application {
     public int selectedPage = 0;
 
     private RequestQueue mRequestQueue;
-
+    private static FirebaseAuth auth;
     private static GlobalContext mInstance;
     //Firebae database
     public FirebaseDatabase firebaseDatabase;
@@ -52,6 +54,7 @@ public class GlobalContext extends Application {
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
         firebaseDatabase = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
 
 //        FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
@@ -59,11 +62,15 @@ public class GlobalContext extends Application {
         //config = new RealmConfiguration.Builder(getApplicationContext()).build();
         //Realm.setDefaultConfiguration(config);
         myCart = new Basket();
+        selectedPage = 0;
     }
+
 
     public static synchronized GlobalContext getInstance() {
         return mInstance;
     }
+
+    public static synchronized FirebaseAuth getFAuthInstance(){return auth;}
 
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
@@ -89,6 +96,12 @@ public class GlobalContext extends Application {
             mRequestQueue.cancelAll(tag);
         }
     }
+
+//    @Override
+//    protected void attachBaseContext(Context base) {
+//        super.attachBaseContext(base);
+//        MultiDex.install(this);
+//    }
 
     public static List<ProductInfoModel> makeTestDataSet() {
 

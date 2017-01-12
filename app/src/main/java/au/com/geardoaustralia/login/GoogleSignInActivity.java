@@ -1,11 +1,15 @@
 package au.com.geardoaustralia.login;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
@@ -25,7 +30,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.io.IOException;
+
+import au.com.geardoaustralia.MainActivity;
 import au.com.geardoaustralia.R;
+import au.com.geardoaustralia.utils.GlobalContext;
+import au.com.geardoaustralia.utils.utilKit;
 
 public class GoogleSignInActivity extends BaseActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -45,6 +55,18 @@ public class GoogleSignInActivity extends BaseActivity implements
 
     private TextView mStatusTextView;
     private TextView mDetailTextView;
+    private SignInButton google_sign_in_button;
+    private Button google_sign_out_button;
+    private Button google_disconnect_button;
+
+
+    private String google_id = "google_id";
+    private String google_name = "google_name";
+    private String google_given_name = "google_given_name";
+    private String google_family_name = "google_family_name";
+    private String google_email = "google_email";
+    private String google_dob = "google_dob";
+    private String google_image_url = "google_image_url";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +77,14 @@ public class GoogleSignInActivity extends BaseActivity implements
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
 
+        google_sign_in_button = (SignInButton) findViewById(R.id.google_sign_in_button);
+        google_sign_out_button = (Button) findViewById(R.id.google_sign_out_button);
+        google_disconnect_button = (Button) findViewById(R.id.google_disconnect_button);
+
         // Button listeners
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
+        google_sign_in_button.setOnClickListener(this);
+        google_disconnect_button.setOnClickListener(this);
+        google_sign_out_button.setOnClickListener(this);
 
         // [START config_signin]
         // Configure Google Sign In
@@ -74,7 +100,7 @@ public class GoogleSignInActivity extends BaseActivity implements
                 .build();
 
         // [START initialize_auth]
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = GlobalContext.getFAuthInstance();
         // [END initialize_auth]
 
         // [START auth_state_listener]
@@ -82,6 +108,7 @@ public class GoogleSignInActivity extends BaseActivity implements
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
+                //AuthCredential credential = GoogleAuthProvider.getCredential(googleIdToken, null);
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
@@ -126,6 +153,10 @@ public class GoogleSignInActivity extends BaseActivity implements
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
+
+                saveInformationLocally(account);
+
+
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed, update UI appropriately
@@ -133,6 +164,38 @@ public class GoogleSignInActivity extends BaseActivity implements
                 updateUI(null);
                 // [END_EXCLUDE]
             }
+        }
+    }
+
+    private void saveInformationLocally(GoogleSignInAccount account) {
+
+        Bitmap bitmap = null;
+        String personId = account.getId();
+        utilKit.saveToPreferences(GoogleSignInActivity.this, google_id, personId);
+
+        String personName = account.getDisplayName();
+        String personGivenName = account.getGivenName();
+        String personFamilyName = account.getFamilyName();
+        String personEmail = account.getEmail();
+        Uri personPhoto = account.getPhotoUrl();
+
+
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), personPhoto);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        utilKit.saveToPreferences(GoogleSignInActivity.this, google_name, personName);
+        utilKit.saveToPreferences(GoogleSignInActivity.this, google_given_name, personGivenName);
+        utilKit.saveToPreferences(GoogleSignInActivity.this, google_family_name, personFamilyName);
+        utilKit.saveToPreferences(GoogleSignInActivity.this, google_email, personEmail);
+
+        if(bitmap != null){
+
+            utilKit.saveBitmapToInternalStorage(bitmap, google_name+google_given_name+google_family_name);
+
         }
     }
     // [END onactivityresult]
@@ -161,6 +224,8 @@ public class GoogleSignInActivity extends BaseActivity implements
                         }
                         // [START_EXCLUDE]
                         hideProgressDialog();
+                        startActivity(new Intent(GoogleSignInActivity.this, MainActivity.class));
+                        finish();
                         // [END_EXCLUDE]
                     }
                 });
@@ -208,14 +273,14 @@ public class GoogleSignInActivity extends BaseActivity implements
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            google_sign_in_button.setVisibility(View.GONE);
+            google_disconnect_button.setVisibility(View.VISIBLE);
         } else {
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
 
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+            google_sign_in_button.setVisibility(View.VISIBLE);
+            google_disconnect_button.setVisibility(View.GONE);
         }
     }
 
@@ -230,11 +295,11 @@ public class GoogleSignInActivity extends BaseActivity implements
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.sign_in_button) {
+        if (i == R.id.google_sign_in_button) {
             signIn();
-        } else if (i == R.id.sign_out_button) {
+        } else if (i == R.id.google_sign_out_button) {
             signOut();
-        } else if (i == R.id.disconnect_button) {
+        } else if (i == R.id.google_disconnect_button) {
             revokeAccess();
         }
     }

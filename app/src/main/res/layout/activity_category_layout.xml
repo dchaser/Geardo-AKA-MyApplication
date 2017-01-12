@@ -8,57 +8,14 @@
     android:orientation="vertical">
 
 
-
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/activity_drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_height="match_parent">
-
-
-        <!-- for Text Tabs -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <include
-                android:id="@+id/catToolbar"
-                layout="@layout/app_bar" />
-
-            <ListView
-                android:id="@+id/lvCategories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:choiceMode="singleChoice" />
-
-
-        </LinearLayout>
-
-
-        <fragment
-            android:id="@+id/fragment_navigation_drawer_id"
-            android:name="au.com.geardoaustralia.categories.NDFragment"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:fitsSystemWindows="true"
-            app:layout="@layout/fragment_navigation_drawer"
-            tools:layout='@layout/fragment_navigation_drawer' />
-
-    </android.support.v4.widget.DrawerLayout>
-
-
     <!--Button bar bottom-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:weightSum="5"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:weightSum="5">
 
         <!--Home-->
         <LinearLayout
@@ -66,6 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
             android:duplicateParentState="true"
             android:orientation="vertical">
 
@@ -73,6 +31,7 @@
                 android:id="@+id/ivHome"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:clickable="false"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/button_effect_home"
                 android:contentDescription="@string/app_name"
@@ -82,6 +41,7 @@
                 android:id="@+id/tvHome"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
+                android:clickable="false"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:text="@string/home"
@@ -97,6 +57,7 @@
             android:id="@+id/llCats"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:clickable="true"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -104,6 +65,7 @@
                 android:id="@+id/ivCats"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:clickable="false"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/button_effect_categories"
                 android:contentDescription="@string/app_name"
@@ -112,6 +74,7 @@
             <TextView
                 android:id="@+id/tvCats"
                 android:layout_width="wrap_content"
+                android:clickable="false"
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
@@ -127,6 +90,7 @@
         <LinearLayout
             android:id="@+id/llDeals"
             android:layout_width="0dp"
+            android:clickable="true"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -134,6 +98,7 @@
             <ImageButton
                 android:id="@+id/ivDeals"
                 android:layout_width="20dp"
+                android:clickable="false"
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/button_effect_search"
@@ -144,6 +109,7 @@
                 android:id="@+id/tvDeals"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
+                android:clickable="false"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:text="@string/deals"
@@ -158,6 +124,7 @@
         <LinearLayout
             android:id="@+id/llCart"
             android:layout_width="0dp"
+            android:clickable="true"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -165,6 +132,7 @@
             <ImageButton
                 android:id="@+id/ivCart"
                 android:layout_width="20dp"
+                android:clickable="false"
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/button_effect_cart"
@@ -176,6 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
+                android:clickable="false"
                 android:gravity="center_horizontal"
                 android:text="@string/cart"
                 android:textColor="@drawable/textview_effect_blue"
@@ -191,12 +160,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/ivAccount"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:clickable="false"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/button_effect_account"
                 android:contentDescription="@string/app_name"
@@ -205,6 +176,7 @@
             <TextView
                 android:id="@+id/tvAccount"
                 android:layout_width="wrap_content"
+                android:clickable="false"
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
@@ -218,5 +190,47 @@
 
     </LinearLayout>
 
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/activity_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <!-- for Text Tabs -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/appToolBar"
+                layout="@layout/app_bar" />
+
+            <ListView
+                android:id="@+id/lvCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:choiceMode="singleChoice" />
+
+
+        </LinearLayout>
+
+
+        <fragment
+            android:id="@+id/fragment_navigation_drawer_id"
+            android:name="au.com.geardoaustralia.categories.SubCategorySelectorFragment"
+            android:layout_width="match_parent"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:fitsSystemWindows="true"
+            app:layout="@layout/fragment_navigation_drawer"
+            tools:layout='@layout/fragment_navigation_drawer' />
+
+    </android.support.v4.widget.DrawerLayout>
 
 </RelativeLayout>

@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/bottom_sheet_main" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <include
-            android:id="@+id/appToolBarSubActivity"
+            android:id="@+id/appToolBar"
             layout="@layout/app_bar" />
 
         <it.neokree.materialtabs.MaterialTabHost
@@ -46,7 +48,5 @@
 
 
     </LinearLayout>
-
-    <include layout="@layout/bottom_sheet_main" />
 
 </android.support.design.widget.CoordinatorLayout>

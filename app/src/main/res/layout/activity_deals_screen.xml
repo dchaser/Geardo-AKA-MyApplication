@@ -1,13 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_deals_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="au.com.geardoaustralia.deals.DealsScreen">
 
-</RelativeLayout>
+    <!--Button bar bottom-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <!--Home-->
+        <LinearLayout
+            android:id="@+id/llHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:duplicateParentState="true"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ivHome"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:clickable="false"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_effect_home"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvHome"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:clickable="false"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/home"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+
+        </LinearLayout>
+
+        <!--Categories-->
+        <LinearLayout
+            android:id="@+id/llCats"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ivCats"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:clickable="false"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_effect_categories"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvCats"
+                android:layout_width="wrap_content"
+                android:clickable="false"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/categories"
+                android:textColor="@drawable/textview_effect_blue"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+
+        </LinearLayout>
+
+        <!--Search-->
+        <LinearLayout
+            android:id="@+id/llDeals"
+            android:layout_width="0dp"
+            android:clickable="true"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ivDeals"
+                android:layout_width="20dp"
+                android:clickable="false"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_effect_search"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvDeals"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:clickable="false"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/deals"
+                android:textColor="@drawable/textview_effect_blue"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+
+        </LinearLayout>
+
+        <!--Cart-->
+        <LinearLayout
+            android:id="@+id/llCart"
+            android:layout_width="0dp"
+            android:clickable="true"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ivCart"
+                android:layout_width="20dp"
+                android:clickable="false"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_effect_cart"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvCart"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:clickable="false"
+                android:gravity="center_horizontal"
+                android:text="@string/cart"
+                android:textColor="@drawable/textview_effect_blue"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+
+        </LinearLayout>
+
+        <!--Account-->
+        <LinearLayout
+            android:id="@+id/llAccount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ivAccount"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:clickable="false"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_effect_account"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvAccount"
+                android:layout_width="wrap_content"
+                android:clickable="false"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/account"
+                android:textColor="@drawable/textview_effect_blue"
+                android:textSize="12sp"
+                android:theme="@style/RobotoTextViewStyle" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

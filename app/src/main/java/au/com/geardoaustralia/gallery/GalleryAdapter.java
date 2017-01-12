@@ -14,6 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
+import au.com.geardoaustralia.FullProductScreen.FullProductPageFragment;
 import au.com.geardoaustralia.R;
 
 /**
@@ -51,6 +52,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Image image = images.get(position);
+
+        FullProductPageFragment.selectedGalleryPosition = position;
 
         Glide.with(mContext).load(image.getMedium())
                 .thumbnail(0.5f)

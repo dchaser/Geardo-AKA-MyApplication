@@ -4,16 +4,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainContainer"
     android:layout_width="match_parent"
+    android:layout_height="50dp"
     android:focusable="false"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content">
+    android:orientation="horizontal">
 
-<ImageView
-    android:id="@+id/ivCatImage"
-    android:src="@drawable/health_beauty"
-    android:scaleType="centerInside"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/ivCatImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/health_beauty" />
 
     <TextView
         android:id="@+id/tvCategoryTitle"
@@ -28,10 +28,10 @@
         android:textSize="20sp" />
 
     <View
-        android:background="@color/gray"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/dp2_deimension"
         android:layout_below="@+id/tvCategoryTitle"
-        android:layout_height="@dimen/dp2_deimension"/>
+        android:background="@color/gray" />
 
 
 </LinearLayout>

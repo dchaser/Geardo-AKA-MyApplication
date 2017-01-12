@@ -6,7 +6,7 @@
         android:id="@+id/mSearch"
         android:icon="@drawable/ic_search_white_36dp"
         android:orderInCategory="100"
-        app:showAsAction="always|collapseActionView"
+        app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:title="@string/search_main_activity_toolbar">
     </item>

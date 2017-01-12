@@ -21,7 +21,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import au.com.geardoaustralia.MainScreen.profile.ProfileScreen;
+import au.com.geardoaustralia.profile.ProfileScreen;
 import au.com.geardoaustralia.R;
 
 
@@ -152,7 +152,7 @@ public class NavigationDrawerFragment extends Fragment implements DasunsAdapter.
 
         if(!mUserLearnedDrawer && !mFromSavedInstanceState){
 
-            mDrawerLayout.openDrawer(containerView);
+            //mDrawerLayout.openDrawer(containerView);
         }
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);

@@ -25,15 +25,30 @@
             android:layout_width="35dp"
             android:background="@drawable/check"
             android:layout_height="35dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
             android:textOff=""
             android:textOn=""
             android:layout_marginRight="5dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignTop="@+id/ivProductImage"/>
 
+        <CheckBox
+            android:id="@+id/cbIsInCart"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="5dp"
+            android:clickable="false"
+            android:layout_marginLeft="5dp"
+            android:visibility="gone"
+            android:textOff=""
+            android:textOn=""
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/ivProductImage"/>
 
 
         <RelativeLayout

@@ -5,7 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="search_main_activity_toolbar">Search Geardo</string>
+    <string name="search_main_activity_toolbar">Search product</string>
     <string name="latest">LATEST</string>
     <string name="most_viewed">MOST VIEWED</string>
     <string name="trendy">TRENDY</string>
@@ -104,6 +104,58 @@
 
     <string name="firebaseui_status_fmt">Firebase User: %s</string>
     <string name="firebaseui_title_text">FirebaseUI Auth</string>
+
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="no_record_to_show">No Records to Show</string>
+    <string name="btnRetry">Tap to Retry</string>
+
+    <string name="tab_item_my_category">Categories</string>
+    <string name="tab_item_last_purchase">Last Purchases</string>
+
+
+    <!-- Text of the Filter menu icon -->
+    <string name="description_cart">Cart</string>
+
+    <!-- Text of the Filter menu icon -->
+    <string name="description_item_view">View</string>
+
+    <!-- Accessibility description for a control that allows the user to close the current screen
+     and go back to the previous one. -->
+    <string name="close_and_go_back">Close and go back</string>
+
+
+    <string name="no_matching_product_available">No product available</string>
+
+    <string name="title_product_detail">Product</string>
+    <string name="title_cart_detail">Cart</string>
+
+    <string name="add_to_cart_message">Price shown is approximate, only store price or offer price will be charged</string>
+
+    <!-- Date Util -->
+    <string name="date_util_term_less">less than</string>
+    <string name="date_util_term_a">a</string>
+    <string name="date_util_term_an">an</string>
+
+    <string name="date_util_unit_second">second</string>
+    <string name="date_util_unit_seconds">seconds</string>
+    <string name="date_util_unit_minute">minute</string>
+    <string name="date_util_unit_minutes">minutes</string>
+    <string name="date_util_unit_hour">hour</string>
+    <string name="date_util_unit_hours">hours</string>
+    <string name="date_util_unit_day">day</string>
+    <string name="date_util_unit_days">days</string>
+    <string name="date_util_unit_month">month</string>
+    <string name="date_util_unit_months">months</string>
+    <string name="date_util_unit_year">year</string>
+    <string name="date_util_unit_years">years</string>
+
+    <string name="date_util_prefix_lt">less than a</string>
+    <string name="date_util_prefix_about">about</string>
+    <string name="date_util_prefix_over">over</string>
+    <string name="date_util_prefix_almost">almost</string>
+
+    <string name="date_util_suffix">ago</string>
+
 
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>

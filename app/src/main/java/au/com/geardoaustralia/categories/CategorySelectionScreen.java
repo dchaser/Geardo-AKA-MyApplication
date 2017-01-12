@@ -1,92 +1,51 @@
 package au.com.geardoaustralia.categories;
 
 import android.app.SearchManager;
-import android.app.SearchableInfo;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import au.com.geardoaustralia.MainActivity;
 import au.com.geardoaustralia.R;
-import au.com.geardoaustralia.cart.ViewCartPopup;
+import au.com.geardoaustralia.cartNew.BaseActivity;
 import au.com.geardoaustralia.utils.GlobalContext;
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
+import au.com.geardoaustralia.utils.MenuBarHandler;
 
 /**
  * Created by DasunPC on 11/22/16.
  */
 
-public class CategorySelectionScreen extends AppCompatActivity {
+public class CategorySelectionScreen extends BaseActivity{
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     GlobalContext globalContext;
-    //bottom bar controls
-    private LinearLayout llCats;
-    private LinearLayout llDeals;
-    private LinearLayout llCart;
-    private LinearLayout llAccount;
-    private LinearLayout llHome;
 
-    private ImageView ivHome;
-    private ImageView ivCats;
-    private ImageView ivDeals;
-    private ImageView ivCart;
-    private ImageView ivAccount;
-
-    private TextView tvHome;
-    private TextView tvCats;
-    private TextView tvDeals;
-    private TextView tvCart;
-    private TextView tvAccount;
-
-    //from beginning
-    private Toolbar toolbar;
-    private NDFragment ndFragment;
+    private SubCategorySelectorFragment subCategorySelectorFragment;
     public static CategorySelectionScreen.RVCategoryAdapter adapter;
     public static List<categoryModel> catData = new ArrayList<>();
     private static int[] selectedArray;
 
-
+    MenuBarHandler menuBarHandler;
 
     public static ListView lvCategories;
     public static int selectedPos = -1;
-
-    Button btnGoToCart;
-    TextView tvCartCount;
 
 
     @Override
@@ -99,20 +58,12 @@ public class CategorySelectionScreen extends AppCompatActivity {
             globalContext = GlobalContext.getInstance();
         }
 
-        //set page number in App class
-        globalContext.selectedPage = 1;
+        menuBarHandler = new MenuBarHandler(CategorySelectionScreen.this);
 
-        toolbar = (Toolbar) findViewById(R.id.catToolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        ndFragment = (NDFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer_id);
+        subCategorySelectorFragment = (SubCategorySelectorFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer_id);
         //setup method shoud be provided with view that must be passed from activity to fragment
-        ndFragment.setUp(R.id.fragment_navigation_drawer_id, (DrawerLayout) findViewById(R.id.activity_drawer_layout), toolbar);
+        subCategorySelectorFragment.setUp(R.id.fragment_navigation_drawer_id, (DrawerLayout) findViewById(R.id.activity_drawer_layout), baseToolbar);
 
-        setUpBottomBarControls(globalContext.selectedPage);
-        clearAll(globalContext.selectedPage);
 
         lvCategories = (ListView) findViewById(R.id.lvCategories);
 
@@ -129,7 +80,7 @@ public class CategorySelectionScreen extends AppCompatActivity {
 
                 //Object o = lvCategories.getItemAtPosition(i);
                 clickedViewItem.setBackgroundColor(getResources().getColor(R.color.orange));
-                NDFragment.changeDatasetAndOpenDrawer(i);
+                SubCategorySelectorFragment.changeDatasetAndOpenDrawer(i);
 
 
             }
@@ -137,338 +88,20 @@ public class CategorySelectionScreen extends AppCompatActivity {
 
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        //handle search bar
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        final SearchView searchView = (SearchView) menu.findItem(R.id.mSearch).getActionView();
-        // Assumes current activity is the searchable activity
-        ComponentName componentName = new ComponentName(this, MainActivity.class);//getComponentName();
-        SearchableInfo info = searchManager.getSearchableInfo(componentName);
-        searchView.setSearchableInfo(info);
+        // MenuItem searchItem = menu.findItem(R.id.mSearch);
 
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v("App", "setOnSearchClickListener");
-                if (searchView.getQuery().length() == 0)
-                    searchView.setQuery("", true);
-            }
-        });
+        // searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 
-        final Menu menus = menu;
-        // SetUpMenu(mMenu);
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                View view = (View) findViewById(R.id.mCart);
-                MenuItem item = menus.getItem(1);
-                if (item.getItemId() == R.id.mCart) {
-                    item.setActionView(R.layout.notification_update_count_layout);
-                    View itemChooser = item.getActionView();
-                    tvCartCount = (TextView) itemChooser.findViewById(R.id.tvCartCount);
-                    btnGoToCart = (Button) itemChooser.findViewById(R.id.btnGoToCart);
-                    btnGoToCart.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(CategorySelectionScreen.this, "Cart", Toast.LENGTH_SHORT).show();
-                            FragmentManager fm = getSupportFragmentManager();
-                            ViewCartPopup dFragment = ViewCartPopup.newInstance("Some Title");
-                            dFragment.show(fm, "cart");
+        //this.menu = menu;
+        getMenuInflater().inflate(R.menu.home_act_filtered, menu);
+        searchView = (SearchView) menu.findItem(R.id.mSearch).getActionView();
+        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this,MainActivity.class)));
 
-                        }
-                    });
-                }
-            }
-        });
-
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.mCart:
-
-                // Show DialogFragment
-                FragmentManager fm = getSupportFragmentManager();
-                ViewCartPopup dFragment = ViewCartPopup.newInstance("Some Title");
-                dFragment.show(fm, "cart");
-
-                return true;
-
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-
-        }
-
-    }
-
-
-    private void setUpBottomBarControls(int pageNumber) {
-
-        //Home
-        llHome = (LinearLayout) findViewById(R.id.llHome);
-        ivHome = (ImageView) findViewById(R.id.ivHome);
-        tvHome = (TextView) findViewById(R.id.tvHome);
-
-        //Categories
-        llCats = (LinearLayout) findViewById(R.id.llCats);
-        ivCats = (ImageView) findViewById(R.id.ivCats);
-        tvCats = (TextView) findViewById(R.id.tvCats);
-        //Deals
-        llDeals = (LinearLayout) findViewById(R.id.llDeals);
-        ivDeals = (ImageView) findViewById(R.id.ivDeals);
-        tvDeals = (TextView) findViewById(R.id.tvDeals);
-        //Cart
-        llCart = (LinearLayout) findViewById(R.id.llCart);
-        ivCart = (ImageView) findViewById(R.id.ivCart);
-        tvCart = (TextView) findViewById(R.id.tvCart);
-        //Account
-        llAccount = (LinearLayout) findViewById(R.id.llAccount);
-        ivAccount = (ImageView) findViewById(R.id.ivAccount);
-        tvAccount = (TextView) findViewById(R.id.tvAccount);
-
-        clearAll(pageNumber);
-
-        llHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (globalContext == null) {
-
-                    globalContext = GlobalContext.getInstance();
-                }
-
-                //set page number in App class
-                globalContext.selectedPage = 0;
-
-            }
-        });
-
-
-        llCats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (globalContext == null) {
-
-                    globalContext = GlobalContext.getInstance();
-                }
-
-                //set page number in App class
-                globalContext.selectedPage = 1;
-                startActivity(new Intent(CategorySelectionScreen.this, CategorySelectionScreen.class));
-                clearAll(globalContext.selectedPage);
-                //go to category screen
-                //startActivity(new Intent(MainActivity.this, CategorySelectionScreen.class));
-
-            }
-        });
-
-
-        llDeals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (globalContext == null) {
-
-                    globalContext = GlobalContext.getInstance();
-                }
-
-                //set page number in App class
-                globalContext.selectedPage = 2;
-                clearAll(globalContext.selectedPage);
-                // startActivity(new Intent(MainActivity.this, DealsScreen.class));
-
-            }
-        });
-
-
-        llCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (globalContext == null) {
-
-                    globalContext = GlobalContext.getInstance();
-                }
-
-                //set page number in App class
-                globalContext.selectedPage = 3;
-                clearAll(globalContext.selectedPage);
-                //startActivity(new Intent(MainActivity.this, DisplayCartDialogFragment.class));
-
-            }
-        });
-
-
-        llAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (globalContext == null) {
-
-                    globalContext = GlobalContext.getInstance();
-                }
-
-                //set page number in App class
-                globalContext.selectedPage = 3;
-                clearAll(globalContext.selectedPage);
-                // startActivity(new Intent(MainActivity.this, AccountScreen.class));
-
-            }
-        });
-
-    }
-
-    private void clearAll(int page) {
-
-        switch (page) {
-
-            case 0:
-                //Home selected
-                ivHome.setBackgroundResource(R.drawable.ic_home_blue);
-                tvHome.setTextColor(getResources().getColor(R.color.lightBlue));
-
-                //Categories
-                ivCats.setBackgroundResource(R.drawable.ic_categories_grey);
-                tvCats.setTextColor(getResources().getColor(R.color.gray));
-
-                //Deals
-                ivDeals.setBackgroundResource(R.drawable.ic_search_grey);
-                tvDeals.setTextColor(getResources().getColor(R.color.gray));
-
-                //Cart
-                ivCart.setBackgroundResource(R.drawable.ic_cart_grey);
-                tvCart.setTextColor(getResources().getColor(R.color.gray));
-
-                //Account
-                ivAccount.setBackgroundResource(R.drawable.ic_account_grey);
-                tvAccount.setTextColor(getResources().getColor(R.color.gray));
-
-                break;
-
-
-            case 1:
-                //Home
-                ivHome.setBackgroundResource(R.drawable.ic_home_grey);
-                tvHome.setTextColor(getResources().getColor(R.color.gray));
-
-                //Categories selected
-                ivCats.setBackgroundResource(R.drawable.ic_categories_blue);
-                tvCats.setTextColor(getResources().getColor(R.color.lightBlue));
-
-                //Deals
-                ivDeals.setBackgroundResource(R.drawable.ic_search_grey);
-                tvDeals.setTextColor(getResources().getColor(R.color.gray));
-
-                //Cart
-                ivCart.setBackgroundResource(R.drawable.ic_cart_grey);
-                tvCart.setTextColor(getResources().getColor(R.color.gray));
-
-                //Account
-                ivAccount.setBackgroundResource(R.drawable.ic_account_grey);
-                tvAccount.setTextColor(getResources().getColor(R.color.gray));
-                break;
-            case 2:
-                //Home
-                ivHome.setBackgroundResource(R.drawable.ic_home_grey);
-                tvHome.setTextColor(getResources().getColor(R.color.gray));
-
-                //Categories
-                ivCats.setBackgroundResource(R.drawable.ic_categories_grey);
-                tvCats.setTextColor(getResources().getColor(R.color.gray));
-
-                //Deals selected
-                ivDeals.setBackgroundResource(R.drawable.ic_search_blue);
-                tvDeals.setTextColor(getResources().getColor(R.color.lightBlue));
-
-                //Cart
-                ivCart.setBackgroundResource(R.drawable.ic_cart_grey);
-                tvCart.setTextColor(getResources().getColor(R.color.gray));
-
-                //Account
-                ivAccount.setBackgroundResource(R.drawable.ic_account_grey);
-                tvAccount.setTextColor(getResources().getColor(R.color.gray));
-                break;
-            case 3:
-                //Home
-                ivHome.setBackgroundResource(R.drawable.ic_home_grey);
-                tvHome.setTextColor(getResources().getColor(R.color.gray));
-
-                //Categories
-                ivCats.setBackgroundResource(R.drawable.ic_categories_grey);
-                tvCats.setTextColor(getResources().getColor(R.color.gray));
-
-                //Deals
-                ivDeals.setBackgroundResource(R.drawable.ic_search_grey);
-                tvDeals.setTextColor(getResources().getColor(R.color.gray));
-
-                //Cart Selected
-                ivCart.setBackgroundResource(R.drawable.ic_cart_blue);
-                tvCart.setTextColor(getResources().getColor(R.color.lightBlue));
-
-                //Account
-                ivAccount.setBackgroundResource(R.drawable.ic_account_grey);
-                tvAccount.setTextColor(getResources().getColor(R.color.gray));
-                break;
-            case 4:
-                //Home
-                ivHome.setBackgroundResource(R.drawable.ic_home_grey);
-                tvHome.setTextColor(getResources().getColor(R.color.gray));
-
-                //Categories
-                ivCats.setBackgroundResource(R.drawable.ic_categories_grey);
-                tvCats.setTextColor(getResources().getColor(R.color.gray));
-
-                //Deals
-                ivDeals.setBackgroundResource(R.drawable.ic_search_grey);
-                tvDeals.setTextColor(getResources().getColor(R.color.gray));
-
-                //Cart
-                ivCart.setBackgroundResource(R.drawable.ic_cart_grey);
-                tvCart.setTextColor(getResources().getColor(R.color.gray));
-
-                //Account Selected
-                ivAccount.setBackgroundResource(R.drawable.ic_account_blue);
-                tvAccount.setTextColor(getResources().getColor(R.color.lightBlue));
-                break;
-
-            default:
-                //Home
-                ivHome.setBackgroundResource(R.drawable.ic_home_blue);
-                tvHome.setTextColor(getResources().getColor(R.color.lightBlue));
-
-                //Categories
-                ivCats.setBackgroundResource(R.drawable.ic_categories_grey);
-                tvCats.setTextColor(getResources().getColor(R.color.gray));
-
-                //Deals
-                ivDeals.setBackgroundResource(R.drawable.ic_search_grey);
-                tvDeals.setTextColor(getResources().getColor(R.color.gray));
-
-                //Cart
-                ivCart.setBackgroundResource(R.drawable.ic_cart_grey);
-                tvCart.setTextColor(getResources().getColor(R.color.gray));
-
-                //Account
-                ivAccount.setBackgroundResource(R.drawable.ic_account_grey);
-                tvAccount.setTextColor(getResources().getColor(R.color.gray));
-                break;
-        }
-
-
+        return true;
     }
 
     public static List<categoryModel> getDataSet() {
@@ -584,8 +217,6 @@ public class CategorySelectionScreen extends AppCompatActivity {
 //            }
 
         }
-
-
 
 
         @Override
