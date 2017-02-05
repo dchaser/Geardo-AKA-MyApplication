@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/rlMainParent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/rbSelectOption"
+        android:background="@drawable/radio"
+        android:layout_marginTop="22dp"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/twentydp"
+        android:layout_marginLeft="@dimen/twentydp"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/tvShippingCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_toEndOf="@+id/rbSelectOption"
+        android:layout_toRightOf="@+id/rbSelectOption"
+        android:layout_marginStart="@dimen/twentydp"
+        android:layout_marginLeft="@dimen/twentydp"
+        android:background="@color/white"
+        android:text="US $ 1288.76"
+        android:textColor="@color/lightBlue"
+        android:textSize="15sp"
+        android:theme="@style/RobotoTextViewStyle" />
+
+    <TextView
+        android:id="@+id/tvShippingCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/twentydp"
+        android:layout_marginLeft="@dimen/twentydp"
+        android:layout_toEndOf="@+id/tvShippingCost"
+        android:layout_toRightOf="@+id/tvShippingCost"
+        android:background="@color/white"
+        android:text="Via DHL"
+        android:textSize="15sp"
+        android:theme="@style/RobotoTextViewStyle" />
+
+
+    <TextView
+        android:id="@+id/tvShippingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="@dimen/twentydp"
+        android:layout_marginLeft="@dimen/twentydp"
+        android:layout_below="@+id/tvShippingCompany"
+        android:layout_toEndOf="@+id/rbSelectOption"
+        android:layout_toRightOf="@+id/rbSelectOption"
+        android:background="@color/white"
+        android:text="Delivery TIme 3-16"
+        android:textSize="15sp"
+        android:theme="@style/RobotoTextViewStyle" />
+
+
+</RelativeLayout>

@@ -66,7 +66,6 @@ public class ShippingFragment extends Fragment {
         if (selectedProduct != null) {
 
             //hide the floating add to cart button on bottom toolbar
-            FullProductPage.fabAddToCart.setVisibility(View.GONE);
             ImageLoader mImageLoader = new ImageLoader(getActivity());
         }
 

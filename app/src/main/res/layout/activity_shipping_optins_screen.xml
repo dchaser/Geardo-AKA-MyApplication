@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="au.com.geardoaustralia.FullProductScreen.subscreens.ShippingOptinsScreen">
+
+    <RelativeLayout
+        android:id="@+id/rlClickToSelectShippingOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:text="Shipping Cost"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:theme="@style/RobotoTextViewStyle" />
+
+
+        <ImageView
+            android:id="@+id/ivGoBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_chevron_left_18pt_3x" />
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.6"
+        android:background="@drawable/border_b" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fivedp"
+        android:layout_marginBottom="@dimen/fivedp"
+        android:layout_marginEnd="@dimen/fivedp"
+        android:layout_marginLeft="@dimen/fivedp"
+        android:layout_marginRight="@dimen/fivedp"
+        android:layout_marginStart="@dimen/fivedp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:text="Ship To"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:theme="@style/RobotoTextViewStyle" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.6"
+        android:background="@drawable/border_b" />
+
+    <RelativeLayout
+        android:id="@+id/rlShipToCountrySelect"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fiftyDP"
+        android:layout_margin="@dimen/fivedp"
+        android:layout_marginEnd="@dimen/fivedp"
+        android:layout_marginLeft="@dimen/fivedp"
+        android:layout_marginRight="@dimen/fivedp"
+        android:layout_marginStart="@dimen/fivedp"
+        android:layout_marginTop="@dimen/fivedp">
+
+        <TextView
+            android:id="@+id/tvShipToCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="dsfldsopfsjodifsdpof"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="@dimen/fivedp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:theme="@style/RobotoTextViewStyle" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_chevron_right_black_18dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llSelectShippingOptionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lvShippingOptions"
+            android:choiceMode="singleChoice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+

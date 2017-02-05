@@ -41,7 +41,9 @@ import de.keyboardsurfer.android.widget.crouton.Style;
  * Created by DasunPC on 1/9/17.
  */
 
-public class RealedProductsFragment extends Fragment implements FullProductPage.ProductPageClickListener {
+public class RealedProductsFragment extends Fragment  {
+
+//    /implements FullProductPage.ProductPageClickListener
 
     private String TAG = RealedProductsFragment.class.getSimpleName();
 
@@ -82,7 +84,6 @@ public class RealedProductsFragment extends Fragment implements FullProductPage.
         if (selectedProduct != null) {
 
             //hide the floating add to cart button on bottom toolbar
-            FullProductPage.fabAddToCart.setVisibility(View.GONE);
 
 
             //Get related products objects set
@@ -158,18 +159,18 @@ public class RealedProductsFragment extends Fragment implements FullProductPage.
 
 
 
-    @Override
-    public void overViewClicked(View v, int position) {
-
-    }
-
-    @Override
-    public void relatedClickedViewClicked(View v, int position) {
-
-    }
-
-    @Override
-    public void ratingsClicked(View v, int position) {
-
-    }
+//    @Override
+//    public void overViewClicked(View v, int position) {
+//
+//    }
+//
+//    @Override
+//    public void relatedClickedViewClicked(View v, int position) {
+//
+//    }
+//
+//    @Override
+//    public void ratingsClicked(View v, int position) {
+//
+//    }
 }

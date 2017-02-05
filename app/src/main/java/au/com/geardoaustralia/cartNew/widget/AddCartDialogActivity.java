@@ -3,6 +3,7 @@ package au.com.geardoaustralia.cartNew.widget;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -94,10 +95,17 @@ public class AddCartDialogActivity extends BaseActivity implements OnClickListen
         TextView itemPrice = (TextView) findViewById(R.id.itemPrice);
         if (selectedItem != null) {
             itemName.setText(selectedItem.name);
-            String decimalString = CommonConstants.getDecimalString(selectedItem.price);
-            itemPrice.setText("Approx. Price: " + decimalString);
+
+            String boldBit = "AU $ " + "<b>" + selectedItem.price + "</b>";
+            itemPrice.setText(Html.fromHtml(boldBit));
             mImageLoader.loadAssetsImage(this, Uri.parse("file:///android_asset/product/" + selectedItem.imageUrlMedium), (ImageView) findViewById(R.id.productImage));
         }
+
+        TextView tvSelection = (TextView) findViewById(R.id.tvSelection);
+        TextView tvQuantity = (TextView) findViewById(R.id.tvQuantity);
+
+
+
 
         displayCartButtBehavior();
     }

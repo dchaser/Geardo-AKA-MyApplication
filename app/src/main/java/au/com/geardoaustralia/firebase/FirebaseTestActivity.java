@@ -25,7 +25,7 @@ public class FirebaseTestActivity extends AppCompatActivity {
         final Button btn = (Button) findViewById(R.id.second);
 
         final GlobalContext global = (GlobalContext.getInstance());
-        global.makeTestDataSet();
+//        global.makeTestDataSet();
         data = global.data;
 
 

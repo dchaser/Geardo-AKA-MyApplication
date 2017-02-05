@@ -70,6 +70,8 @@
                 android:theme="@style/RobotoTextViewStyle"
                 android:gravity="center_horizontal"
                 android:text="Xiaomi 10000mAh Power Bank"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold" />

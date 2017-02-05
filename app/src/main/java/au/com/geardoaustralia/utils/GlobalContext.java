@@ -19,8 +19,7 @@ import java.util.List;
 
 import au.com.geardoaustralia.MainScreen.MainContentMainActivity.ProductInfoModel;
 import au.com.geardoaustralia.R;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
+import au.com.geardoaustralia.cartNew.data.ShippingMethod;
 
 /**
  * Created by DasunPC on 11/8/16.
@@ -35,6 +34,9 @@ public class GlobalContext extends Application {
 
     //page number
     public int selectedPage = 0;
+    public String selectedCountry = null;
+    public String countryCode = null;
+    public ShippingMethod selectedShippingMethod = new ShippingMethod();
 
     private RequestQueue mRequestQueue;
     private static FirebaseAuth auth;
@@ -44,7 +46,6 @@ public class GlobalContext extends Application {
     //Firebase crash reporting instance
     public FirebaseAnalytics mFirebaseAnalytics;
 
-    RealmConfiguration config = null;
 
     @Override
     public void onCreate() {
@@ -102,40 +103,40 @@ public class GlobalContext extends Application {
 //        super.attachBaseContext(base);
 //        MultiDex.install(this);
 //    }
-
-    public static List<ProductInfoModel> makeTestDataSet() {
-
-        for (int i = 0; i < 10; i++) {
-
-            String[] titles = {"G-link HDMI Cable Gold edition v2.0", "Xiaomi 10000mAh Power Bank", "Battery 1160mAh for Gopro Hero 4", "HOCO Dual Car Charger UC204", "GoPro TriPod Float 7 in 1 Accessories Kit"};
-            int[] pics = {R.drawable.glinkhdmiblackwire, R.drawable.xiaomi_power_bank, R.drawable.gopro_battery, R.drawable.dualcarcharger, R.drawable.suctioncup};
-            String[] reducedPrices = {"$132.95", "$132.95", "$119.99", "$125.99", "$113.99"};
-            String[] prices = {"$12.95", "$15.99", "$19.99", "$25.99", "$3.99"};
-            String[] desc = {"HDMI 2.0, which is backwards compatible with earlier versions of the HDMI specification, is the most recent update of the HDMI specification. It also enables key enhancements to support market requirements for enhancing the consumer video and audio experience.\n" +
-                    "\n", "Model NDY-02-AM\n" +
-                    "Battery type Lithium-ion Polymer rechargeable cell\n" +
-                    "Input Voltage DC 5.0V\n" +
-                    "Output Voltage DC 5.1V\n" +
-                    "Input current 2000mA(TYP)", "HDMI 2.0, which is backwards compatible with earlier versions of the HDMI specification, is the most recent update of the HDMI specification. It also enables key enhancements to support market requirements for enhancing the consumer video and audio experience.\n" +
-                    "\n", "Auto Suction Cup+Tripod Mount \n" +
-                    "•Not included the waterproof shell.\n" +
-                    "•Compatible with: GoPro HD Hero 1/2/3/3+/4. \n" +
-                    "•Dash/Windshield Suction mount for GoPro Camera.\n" +
-                    "•180° rotation and adjustable arm for optimum positioning.", "100% New and High Quality!\n" +
-                    "40 pcs Accessories Set for GoPro Hero 2 3 3+ 4\n" +
-                    "Meet most of your needs for Supporting Accessories when you are Shooting with your GoPro Hero Camera. All in One !!"};
-
-            ProductInfoModel current = new ProductInfoModel();
-
-            current.Title = titles[i % titles.length];
-            current.thumnailUrl = pics[i % pics.length];
-            current.reducedPrice = reducedPrices[i % reducedPrices.length];
-            current.price = prices[i % prices.length];
-            current.descriptionl = desc[i % desc.length];
-
-            data.add(current);
-        }
-
-        return data;
-    }
+//
+//    public static List<ProductInfoModel> makeTestDataSet() {
+//
+//        for (int i = 0; i < 10; i++) {
+//
+//            String[] titles = {"G-link HDMI Cable Gold edition v2.0", "Xiaomi 10000mAh Power Bank", "Battery 1160mAh for Gopro Hero 4", "HOCO Dual Car Charger UC204", "GoPro TriPod Float 7 in 1 Accessories Kit"};
+//            int[] pics = {R.drawable.glinkhdmiblackwire, R.drawable.xiaomi_power_bank, R.drawable.gopro_battery, R.drawable.dualcarcharger, R.drawable.suctioncup};
+//            String[] reducedPrices = {"$132.95", "$132.95", "$119.99", "$125.99", "$113.99"};
+//            String[] prices = {"$12.95", "$15.99", "$19.99", "$25.99", "$3.99"};
+//            String[] desc = {"HDMI 2.0, which is backwards compatible with earlier versions of the HDMI specification, is the most recent update of the HDMI specification. It also enables key enhancements to support market requirements for enhancing the consumer video and audio experience.\n" +
+//                    "\n", "Model NDY-02-AM\n" +
+//                    "Battery type Lithium-ion Polymer rechargeable cell\n" +
+//                    "Input Voltage DC 5.0V\n" +
+//                    "Output Voltage DC 5.1V\n" +
+//                    "Input current 2000mA(TYP)", "HDMI 2.0, which is backwards compatible with earlier versions of the HDMI specification, is the most recent update of the HDMI specification. It also enables key enhancements to support market requirements for enhancing the consumer video and audio experience.\n" +
+//                    "\n", "Auto Suction Cup+Tripod Mount \n" +
+//                    "•Not included the waterproof shell.\n" +
+//                    "•Compatible with: GoPro HD Hero 1/2/3/3+/4. \n" +
+//                    "•Dash/Windshield Suction mount for GoPro Camera.\n" +
+//                    "•180° rotation and adjustable arm for optimum positioning.", "100% New and High Quality!\n" +
+//                    "40 pcs Accessories Set for GoPro Hero 2 3 3+ 4\n" +
+//                    "Meet most of your needs for Supporting Accessories when you are Shooting with your GoPro Hero Camera. All in One !!"};
+//
+//            ProductInfoModel current = new ProductInfoModel();
+//
+//            current.Title = titles[i % titles.length];
+//            current.thumnailUrl = pics[i % pics.length];
+//            current.reducedPrice = reducedPrices[i % reducedPrices.length];
+//            current.price = prices[i % prices.length];
+//            current.descriptionl = desc[i % desc.length];
+//
+//            data.add(current);
+//        }
+//
+//        return data;
+//    }
 }

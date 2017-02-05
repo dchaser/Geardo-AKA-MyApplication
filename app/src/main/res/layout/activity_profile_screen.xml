@@ -43,22 +43,31 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.4"
+                        android:layout_weight="0.3"
                         android:background="@color/lightBlue"
                         android:gravity="center_horizontal|center_vertical"
                         android:orientation="vertical">
 
-                        <com.github.siyamed.shapeimageview.CircularImageView
+
+                        <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/civPImage"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:scaleType="center"
-                            android:src="@drawable/ic_account_circle_black_48dp"
-                            app:siBorderColor="@android:color/transparent"
-                            app:siBorderWidth="6dp" />
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_centerInParent="true"
+                         />
+
 
                         <TextView
                             android:id="@+id/tvUserName"
+                            android:textColor="@color/white"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tvUserEmail"
+                            android:textColor="@color/white"
+                            android:gravity="center_horizontal|center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
@@ -231,13 +240,13 @@
 
             <fragment
                 android:id="@+id/fragment_nav_drawer_profile"
-                android:name="au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerFragment"
+                android:name="au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerLeft"
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:fitsSystemWindows="true"
-                app:layout="@layout/fragment_navigation_drawer"
-                tools:layout='@layout/fragment_navigation_drawer' />
+                app:layout="@layout/nav_drawer_left_layout"
+                tools:layout="@layout/nav_drawer_left_layout" />
 
         </android.support.v4.widget.DrawerLayout>
 

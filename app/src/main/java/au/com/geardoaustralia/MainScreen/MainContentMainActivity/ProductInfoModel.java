@@ -5,8 +5,6 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-import io.realm.RealmObject;
-import io.realm.annotations.Index;
 
 /**
  * Created by DasunPC on 11/3/16.

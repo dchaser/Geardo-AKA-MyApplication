@@ -91,7 +91,6 @@ public class MenuBarHandler {
                 if(globalContext.selectedPage != 0){
                     globalContext.selectedPage = 0;
                     (mContext).startActivity(new Intent(mContext, MainActivity.class));
-                    ((AppCompatActivity)mContext).finish();
                 }
 
 
@@ -113,7 +112,6 @@ public class MenuBarHandler {
                 if(globalContext.selectedPage != 1){
                     globalContext.selectedPage = 1;
                     (mContext).startActivity(new Intent(mContext, CategorySelectionScreen.class));
-                    ((AppCompatActivity)mContext).finish();
                 }
 
 
@@ -138,7 +136,6 @@ public class MenuBarHandler {
                 if(globalContext.selectedPage != 2){
                     globalContext.selectedPage = 2;
                     (mContext).startActivity(new Intent(mContext, DealsScreen.class));
-                    ((AppCompatActivity)mContext).finish();
                 }
 
 
@@ -162,7 +159,6 @@ public class MenuBarHandler {
                 if(globalContext.selectedPage != 3){
                     globalContext.selectedPage = 3;
                     (mContext).startActivity(new Intent(mContext, CartActivity.class));
-                    ((AppCompatActivity)mContext).finish();
                 }
 
 
@@ -184,7 +180,6 @@ public class MenuBarHandler {
                 if(globalContext.selectedPage != 4){
                     globalContext.selectedPage = 4;
                     (mContext).startActivity(new Intent(mContext, ProfileScreen.class));
-                    ((AppCompatActivity)mContext).finish();
                 }
 
 

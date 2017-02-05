@@ -34,7 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Database Name
      */
-    private static final String DB_NAME = "geardo_store";
+    private static final String DB_NAME = "geardo_store.db";
 
     /**
      * Constructor Takes and keeps a reference of the passed context in order to access to the

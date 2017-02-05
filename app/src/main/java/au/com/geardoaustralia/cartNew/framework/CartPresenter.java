@@ -11,6 +11,8 @@ public interface CartPresenter {
 
     void removeItem(Object item);
 
+    void removeAllItems();
+
     void showMeCategoryItems(int id);
 
     void showMeItemsInCart();

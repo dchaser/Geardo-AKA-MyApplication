@@ -57,18 +57,18 @@ public class SubCategorySelectorFragment extends CommonTabFragment {
         llm = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         adapter = new SubCategorySelectorFragment.catFilterAdapter(getSubCategryDataSet(0), getActivity());
-        adapter.setClickListener(new CategorySelectionScreen.ListenerToSubCategoryClicks() {
-            @Override
-            public void subCategoryClicked(View v, int position, Bundle batton) {
-
-                // intent to Sort and Refine screen
-                Intent toSortScreen = new Intent(getActivity(), SortAndRefinerScreen.class);
-                toSortScreen.putExtra("subcat", position);
-                startActivity(toSortScreen);
-
-
-            }
-        });
+//        adapter.setClickListener(new CategorySelectionScreen.ListenerToSubCategoryClicks() {
+//            @Override
+//            public void subCategoryClicked(View v, int position, Bundle batton) {
+//
+//                // intent to Sort and Refine screen
+//                Intent toSortScreen = new Intent(getActivity(), SortAndRefinerScreen.class);
+//                toSortScreen.putExtra("subcat", position);
+//                startActivity(toSortScreen);
+//
+//
+//            }
+//        });
 
 
         categoryFilterRV.setAdapter(adapter);
@@ -112,7 +112,7 @@ public class SubCategorySelectorFragment extends CommonTabFragment {
 
         openDrawerExplicitly();
 
-        ListView lv = CategorySelectionScreen.lvCategories;
+        ListView lv = CategorySelectionScreen.lvSubCatList;
         int size = lv.getChildCount();
 
         for(int a = 0; a < size; a++){
@@ -382,7 +382,6 @@ public class SubCategorySelectorFragment extends CommonTabFragment {
 
         private List<categoryModel> categoryList;
         private SubCategorySelectorFragment.catFilterAdapter.subCategoryFilter subCategoryFilter;
-        private CategorySelectionScreen.ListenerToSubCategoryClicks listenerToSubCategoryClicks;
         private List<categoryModel> dictionaryWords = new ArrayList<>();
         private List<categoryModel> filteredList = new ArrayList<>();
         private Context context;
@@ -423,9 +422,7 @@ public class SubCategorySelectorFragment extends CommonTabFragment {
             return categoryList.size();
         }
 
-        void setClickListener(CategorySelectionScreen.ListenerToSubCategoryClicks listenerOfClicks) {
-            this.listenerToSubCategoryClicks = listenerOfClicks;
-        }
+
 
         @Override
         public Filter getFilter() {
@@ -451,10 +448,10 @@ public class SubCategorySelectorFragment extends CommonTabFragment {
 
                 //deleteItem(getAdapterPosition());
 
-                if (listenerToSubCategoryClicks != null) {
-
-                    listenerToSubCategoryClicks.subCategoryClicked(v, getAdapterPosition(), new Bundle());
-                }
+//                if (listenerToSubCategoryClicks != null) {
+//
+//                    listenerToSubCategoryClicks.subCategoryClicked(v, getAdapterPosition(), new Bundle());
+//                }
 
             }
 

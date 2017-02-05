@@ -13,10 +13,17 @@ import java.util.ArrayList;
  */
 public class Product implements Parcelable {
 
+
     public int id;
-    public int categoryId;
+    public int subcategoryId;
+    public int secondary_subcat_id;
+    public int ternary_subcat_id;
     public int productId;
+    public int merchant_id;
+    public int is_free_shipping;
+    public int is_mobile_exclusive;
     public String price;
+    public String shipping_id;
     public String reducedPrice;
     public String description;
     public String imageUrlOriginal;
@@ -24,56 +31,41 @@ public class Product implements Parcelable {
     public String imageUrlSmall;
     public String imageUrlMedium;
     public String name;
-    //search tags will not be needed i
-    public int quantity;
-
-    //following fiedls are comma seperated text fields in sqlite but here they should give a ArrayList of rating objects and related ones
+    public String item_code;
+    public String product_thumb_one;
+    public String product_thumb_two;
+    public String product_thumb_three;
+    public String product_thumb_four;
+    public String product_thumb_five;
+    public String product_thumb_six;
+    public String product_thumb_seven;
+    public String product_thumb_eight;
+    public String product_thumb_nine;
+    public String product_thumb_ten;
+    public String min_order;
+    public String model_number;
+    public String gross_wight_package;
+    public String package_size;
+    public String in_stock_quantity;
+    public String isFavorite;
+    public String seasonal_discount;
+    public String recently_viewed;
     public ArrayList<String> relatedProductIDs;
     public ArrayList<String> relatedRatings;
-
-    /*
-    * Utility variables which are supposed to work for item deletion and addition
-    */
+    public ArrayList<BuyingOption> buyingOptions;
     public boolean isInCart = false;
     public double totalPrice = 0;
+    public int quantity = 0;
+    public int selectedBuyingOptionId = 0;
+    public int thumb_count = 0;
 
     public Product(){
 
         relatedProductIDs = new ArrayList<>();
         relatedRatings = new ArrayList<>();
+        buyingOptions = new ArrayList<>();
     }
 
-
-    protected Product(Parcel in) {
-        id = in.readInt();
-        categoryId = in.readInt();
-        productId = in.readInt();
-        price = in.readString();
-        reducedPrice = in.readString();
-        description = in.readString();
-        imageUrlOriginal = in.readString();
-        imageUrlThumb = in.readString();
-        imageUrlSmall = in.readString();
-        imageUrlMedium = in.readString();
-        name = in.readString();
-        quantity = in.readInt();
-        this.relatedProductIDs = in.readArrayList(String.class.getClassLoader());
-        this.relatedRatings = in.readArrayList(String.class.getClassLoader());
-        isInCart = in.readByte() != 0;
-        totalPrice = in.readDouble();
-    }
-
-    public static final Creator<Product> CREATOR = new Creator<Product>() {
-        @Override
-        public Product createFromParcel(Parcel in) {
-            return new Product(in);
-        }
-
-        @Override
-        public Product[] newArray(int size) {
-            return new Product[size];
-        }
-    };
 
     /*
     * (non-Javadoc)
@@ -116,21 +108,108 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeInt(categoryId);
-        dest.writeInt(productId);
-        dest.writeString(price);
-        dest.writeString(reducedPrice);
-        dest.writeString(description);
-        dest.writeString(imageUrlOriginal);
-        dest.writeString(imageUrlThumb);
-        dest.writeString(imageUrlSmall);
-        dest.writeString(imageUrlMedium);
-        dest.writeString(name);
-        dest.writeInt(quantity);
-        dest.writeList(relatedProductIDs);
-        dest.writeList(relatedRatings);
-        dest.writeByte((byte) (isInCart ? 1 : 0));
-        dest.writeDouble(totalPrice);
+        dest.writeInt(this.id);
+        dest.writeInt(this.subcategoryId);
+        dest.writeInt(this.secondary_subcat_id);
+        dest.writeInt(this.ternary_subcat_id);
+        dest.writeInt(this.productId);
+        dest.writeInt(this.merchant_id);
+        dest.writeInt(this.is_free_shipping);
+        dest.writeInt(this.is_mobile_exclusive);
+        dest.writeString(this.price);
+        dest.writeString(this.shipping_id);
+        dest.writeString(this.reducedPrice);
+        dest.writeString(this.description);
+        dest.writeString(this.imageUrlOriginal);
+        dest.writeString(this.imageUrlThumb);
+        dest.writeString(this.imageUrlSmall);
+        dest.writeString(this.imageUrlMedium);
+        dest.writeString(this.name);
+        dest.writeString(this.item_code);
+        dest.writeString(this.product_thumb_one);
+        dest.writeString(this.product_thumb_two);
+        dest.writeString(this.product_thumb_three);
+        dest.writeString(this.product_thumb_four);
+        dest.writeString(this.product_thumb_five);
+        dest.writeString(this.product_thumb_six);
+        dest.writeString(this.product_thumb_seven);
+        dest.writeString(this.product_thumb_eight);
+        dest.writeString(this.product_thumb_nine);
+        dest.writeString(this.product_thumb_ten);
+        dest.writeString(this.min_order);
+        dest.writeString(this.model_number);
+        dest.writeString(this.gross_wight_package);
+        dest.writeString(this.package_size);
+        dest.writeString(this.in_stock_quantity);
+        dest.writeString(this.isFavorite);
+        dest.writeString(this.seasonal_discount);
+        dest.writeString(this.recently_viewed);
+        dest.writeStringList(this.relatedProductIDs);
+        dest.writeStringList(this.relatedRatings);
+        dest.writeTypedList(this.buyingOptions);
+        dest.writeByte(this.isInCart ? (byte) 1 : (byte) 0);
+        dest.writeDouble(this.totalPrice);
+        dest.writeInt(this.quantity);
+        dest.writeInt(this.selectedBuyingOptionId);
+        dest.writeInt(this.thumb_count);
     }
+
+    protected Product(Parcel in) {
+        this.id = in.readInt();
+        this.subcategoryId = in.readInt();
+        this.secondary_subcat_id = in.readInt();
+        this.ternary_subcat_id = in.readInt();
+        this.productId = in.readInt();
+        this.merchant_id = in.readInt();
+        this.is_free_shipping = in.readInt();
+        this.is_mobile_exclusive = in.readInt();
+        this.price = in.readString();
+        this.shipping_id = in.readString();
+        this.reducedPrice = in.readString();
+        this.description = in.readString();
+        this.imageUrlOriginal = in.readString();
+        this.imageUrlThumb = in.readString();
+        this.imageUrlSmall = in.readString();
+        this.imageUrlMedium = in.readString();
+        this.name = in.readString();
+        this.item_code = in.readString();
+        this.product_thumb_one = in.readString();
+        this.product_thumb_two = in.readString();
+        this.product_thumb_three = in.readString();
+        this.product_thumb_four = in.readString();
+        this.product_thumb_five = in.readString();
+        this.product_thumb_six = in.readString();
+        this.product_thumb_seven = in.readString();
+        this.product_thumb_eight = in.readString();
+        this.product_thumb_nine = in.readString();
+        this.product_thumb_ten = in.readString();
+        this.min_order = in.readString();
+        this.model_number = in.readString();
+        this.gross_wight_package = in.readString();
+        this.package_size = in.readString();
+        this.in_stock_quantity = in.readString();
+        this.isFavorite = in.readString();
+        this.seasonal_discount = in.readString();
+        this.recently_viewed = in.readString();
+        this.relatedProductIDs = in.createStringArrayList();
+        this.relatedRatings = in.createStringArrayList();
+        this.buyingOptions = in.createTypedArrayList(BuyingOption.CREATOR);
+        this.isInCart = in.readByte() != 0;
+        this.totalPrice = in.readDouble();
+        this.quantity = in.readInt();
+        this.selectedBuyingOptionId = in.readInt();
+        this.thumb_count = in.readInt();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel source) {
+            return new Product(source);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 }

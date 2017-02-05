@@ -47,6 +47,19 @@ public class CartInteractorImpl implements CartInteractor {
     }
 
     @Override
+    public void removeAllItemsFromCart(OnCartResponseListener listener) {
+
+        boolean removeAllCartProducts = DatabaseManager.getInstance().removeAllCartProducts();
+        if (removeAllCartProducts) {
+            LOGD(TAG, "All cart Items successfully deleted from local database");
+            listener.onSuccess();
+        } else {
+            LOGD(TAG, "Item not deleted from local database");
+            listener.onError();
+        }
+    }
+
+    @Override
     public void getTotalItemsInCart(final OnCartResponseListener listener) {
         new Handler().post(new Runnable() {
             @Override
@@ -64,13 +77,13 @@ public class CartInteractorImpl implements CartInteractor {
     }
 
     @Override
-    public void getCategoryItems(final OnCartResponseListener listener, final int categoryId) {
+    public void getCategoryItems(final OnCartResponseListener listener, final int subcategoryId) {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
 
                 ArrayList<Product> cartProducts = DatabaseManager.getInstance().getCartProducts();
-                ArrayList<Product> productsByCategory = DatabaseManager.getInstance().getProductsByCategory(categoryId);
+                ArrayList<Product> productsByCategory = DatabaseManager.getInstance().getProductsBySubCategoryID(subcategoryId);
 
                 int position = 0;
                 for (Product product : productsByCategory) {

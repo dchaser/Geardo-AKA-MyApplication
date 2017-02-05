@@ -6,6 +6,6 @@ package au.com.geardoaustralia.categories;
 
 public class categoryModel {
 
-    public  String Title;
-    public int thumnailUrl;
+    public String Title;
+    public String thumnailUrl;
 }

@@ -1,6 +1,7 @@
 package au.com.geardoaustralia.profile;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
@@ -8,26 +9,33 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.squareup.picasso.Picasso;
 
-import au.com.geardoaustralia.MainActivity;
-import au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerFragment;
+import java.util.List;
+
+import au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerLeft;
 import au.com.geardoaustralia.R;
 import au.com.geardoaustralia.cartNew.BaseActivity;
+import au.com.geardoaustralia.cartNew.framework.CartPresenter;
+import au.com.geardoaustralia.cartNew.framework.CartPresenterImpl;
 import au.com.geardoaustralia.login.SignupActivity;
 import au.com.geardoaustralia.splash.SplashActivity;
 import au.com.geardoaustralia.utils.GlobalContext;
 import au.com.geardoaustralia.utils.MenuBarHandler;
+import de.hdodenhof.circleimageview.CircleImageView;
 //http://www.androidhive.info/2016/06/android-getting-started-firebase-simple-login-registration-auth/
 
 public class ProfileScreen extends BaseActivity {
 
-    private NavigationDrawerFragment drawerFragment;
+    private NavigationDrawerLeft drawerFragment;
 
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
             changeEmail, changePassword, sendEmail, remove, signOut;
@@ -38,17 +46,49 @@ public class ProfileScreen extends BaseActivity {
     private FirebaseAuth auth;
     MenuBarHandler menuBarHandler;
 
+    String displayname;
+    String email;
+    Uri photouri;
+
+
+    TextView tvUserName; TextView tvUserEmail; CircleImageView civPImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_screen);
 
+        civPImage = (CircleImageView) findViewById(R.id.civPImage);
+        tvUserName = (TextView) findViewById(R.id.tvUserName);
+        tvUserEmail = (TextView) findViewById(R.id.tvUserEmail);
 
-        drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nav_drawer_profile);
+
+        drawerFragment = (NavigationDrawerLeft) getSupportFragmentManager().findFragmentById(R.id.fragment_nav_drawer_profile);
         drawerFragment.setUp(R.id.fragment_nav_drawer_profile, (DrawerLayout) findViewById(R.id.dlProfileScreen), baseToolbar);
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
+
+
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+
+        if (firebaseUser != null) {
+
+            displayname = firebaseUser.getDisplayName();
+             email = firebaseUser.getEmail();
+            photouri = firebaseUser.getPhotoUrl();
+
+        }
+
+        tvUserName.setText(displayname);
+        tvUserEmail.setText(email);
+        if (photouri != null) {
+
+            Picasso.with(ProfileScreen.this.getApplicationContext()).load(photouri)
+                    .placeholder(R.drawable.logo_geardo).error(R.drawable.ic_launcher)
+                    .into(civPImage);
+
+
+        }
 
         menuBarHandler = new MenuBarHandler(ProfileScreen.this);
 
@@ -62,7 +102,7 @@ public class ProfileScreen extends BaseActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(ProfileScreen.this, SplashActivity.class));
+                    startActivity(new Intent(ProfileScreen.this, SignupActivity.class));
                     finish();
                 }
             }
@@ -258,6 +298,7 @@ public class ProfileScreen extends BaseActivity {
     //sign out method
     public void signOut() {
         auth.signOut();
+       // cartPresenter.removeAllItems();
     }
 
     @Override

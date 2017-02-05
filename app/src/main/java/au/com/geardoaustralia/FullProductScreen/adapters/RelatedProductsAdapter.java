@@ -37,7 +37,7 @@ import au.com.geardoaustralia.utils.CommonConstants;
 
 public class RelatedProductsAdapter extends RecyclerView.Adapter<RelatedProductsAdapter.RelatedProductViewHolder> {
 
-    public FullProductPage.ProductPageClickListener mItemClickListener;
+//    public FullProductPage.ProductPageClickListener mItemClickListener;
     private List<Product> relatedProducts;
     private Context mContext;
     private final ImageLoader mImageLoader;
@@ -78,10 +78,10 @@ public class RelatedProductsAdapter extends RecyclerView.Adapter<RelatedProducts
         public void onClick(View v) {
 
             if (v.getId() == R.id.card_view) {
-                if (mItemClickListener != null) {
-
-                    mItemClickListener.relatedClickedViewClicked(v, -1);
-                }
+//                if (mItemClickListener != null) {
+//
+//                    mItemClickListener.relatedClickedViewClicked(v, -1);
+//                }
 
             }
 

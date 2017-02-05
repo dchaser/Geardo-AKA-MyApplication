@@ -35,8 +35,9 @@ import au.com.geardoaustralia.utils.CommonConstants;
  * Created by DasunPC on 1/9/17.
  */
 
-public class RatingsFragment extends Fragment implements FullProductPage.ProductPageClickListener {
+public class RatingsFragment extends Fragment  {
 
+    //implements FullProductPage.ProductPageClickListener
 
     private String TAG = RatingsFragment.class.getSimpleName();
     private ArrayList<CustomerReview> ratingsList;
@@ -91,7 +92,6 @@ public class RatingsFragment extends Fragment implements FullProductPage.Product
         if (selectedProduct != null) {
 
 //            hide the floating add to cart button on bottom toolbar
-            FullProductPage.fabAddToCart.setVisibility(View.GONE);
 
             ImageLoader mImageLoader = new ImageLoader(getActivity());
             //setup frgamnet controls
@@ -170,18 +170,18 @@ public class RatingsFragment extends Fragment implements FullProductPage.Product
     }
 
 
-    @Override
-    public void overViewClicked(View v, int position) {
-
-    }
-
-    @Override
-    public void relatedClickedViewClicked(View v, int position) {
-
-    }
-
-    @Override
-    public void ratingsClicked(View v, int position) {
-
-    }
+//    @Override
+//    public void overViewClicked(View v, int position) {
+//
+//    }
+//
+//    @Override
+//    public void relatedClickedViewClicked(View v, int position) {
+//
+//    }
+//
+//    @Override
+//    public void ratingsClicked(View v, int position) {
+//
+//    }
 }

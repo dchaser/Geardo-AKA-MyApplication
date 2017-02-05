@@ -29,6 +29,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,8 +56,7 @@ import static au.com.geardoaustralia.cartNew.util.LogUtils.LOGE;
 
 public class MyFragment extends CommonTabFragment implements LoaderManager.LoaderCallbacks<List<Product>>, BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
-    @Bind(R.id.list)
-    CollectionRecyclerView mCollectionView;
+
     private static final int TAG_METADATA_TOKEN = 0x8;
     private SliderLayout mDemoSlider;
     int fragMentTag;
@@ -171,7 +171,20 @@ public class MyFragment extends CommonTabFragment implements LoaderManager.Loade
 
         @Override
         public void makeFavorite(View v, int position, Bundle batton) {
-            Crouton.makeText(getActivity(),"Feature under construction", Style.ALERT).show();
+
+            int productId = adapter.getProductId(position);
+            Product product = DatabaseManager.getInstance().getProductById(productId);
+
+            if(product.isFavorite != null && product.isFavorite.equals("1")){
+                //remove from favorites
+                DatabaseManager.getInstance().removeProductFromFavorite(productId);
+                Crouton.makeText(getActivity(),"Removed from Favorites", Style.ALERT).show();
+            }else{
+                DatabaseManager.getInstance().saveProductAsFavorite(productId);
+                Crouton.makeText(getActivity(),"Added to Favorites", Style.INFO).show();
+            }
+
+
         }
     };
 
@@ -202,6 +215,7 @@ public class MyFragment extends CommonTabFragment implements LoaderManager.Loade
 
     // Append the next page of data into the adapter
     // This method probably sends out a network request and appends new data items to your adapter.
+
     public void loadNextDataFromApi(int offset) {
         Toast.makeText(getActivity(), "Loading Next Batch..No data", Toast.LENGTH_SHORT).show();
         // Send an API request to retrieve appropriate paginated data
@@ -441,7 +455,8 @@ public class MyFragment extends CommonTabFragment implements LoaderManager.Loade
                 if (TextUtils.isEmpty(productItem.imageUrlOriginal)) {
                     holder.ivProductImage.setImageResource(R.drawable.logo_geardo);
                 } else {
-                    mImageLoader.loadAssetsImage(mContext, Uri.parse(CommonConstants.ROOT_PATH + productItem.imageUrlOriginal), holder.ivProductImage);
+                    Picasso.with(mContext).load(CommonConstants.ROOT_PATH+productItem.imageUrlOriginal).into(holder.ivProductImage);
+                    //mImageLoader.loadAssetsImage(mContext, Uri.parse(CommonConstants.ROOT_PATH + productItem.imageUrlOriginal), holder.ivProductImage);
                 }
 
                 holder.tvProductTitle.setText(productItem.name);
@@ -450,6 +465,12 @@ public class MyFragment extends CommonTabFragment implements LoaderManager.Loade
                 //holder.tvProductDescription.setText(productList.get(position).descriptionl);
                 // Set the view to fade in
                 //setFadeAnimation(holder.card_view);
+
+            if(productItem.isFavorite != null && productItem.isFavorite.equals("1")){
+                holder.ibFavorite.setChecked(true);
+            }else{
+                holder.ibFavorite.setChecked(false);
+            }
         }
 
         @Override
@@ -495,6 +516,7 @@ public class MyFragment extends CommonTabFragment implements LoaderManager.Loade
                 tvProductReducedPrice = (TextView) itemView.findViewById(R.id.tvProductReducedPrice);
                 tvProductPrice = (TextView) itemView.findViewById(R.id.tvProductPrice);
                 card_view.setOnClickListener(this);
+                ibFavorite.setOnClickListener(this);
             }
 
             @Override

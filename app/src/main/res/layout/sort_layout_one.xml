@@ -16,10 +16,10 @@
         <ImageView
             android:id="@+id/ivProductTumbnailImage"
             android:layout_width="0dp"
+            android:src="@drawable/dualcarcharger"
             android:layout_height="match_parent"
             android:layout_weight="0.45"
-            android:scaleType="centerInside"
-            android:src="@drawable/dualcarcharger" />
+            android:scaleType="centerInside" />
 
         <RelativeLayout
             android:id="@+id/rlTAndPrice"

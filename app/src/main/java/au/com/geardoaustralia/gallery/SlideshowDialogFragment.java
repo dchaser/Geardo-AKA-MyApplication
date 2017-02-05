@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import au.com.geardoaustralia.R;
+import au.com.geardoaustralia.utils.CommonConstants;
 
 /**
  * Created by DasunPC on 11/8/16.
@@ -47,6 +50,7 @@ public class SlideshowDialogFragment  extends DialogFragment {
 
         images = (ArrayList<Image>) getArguments().getSerializable("images");
         selectedPosition = getArguments().getInt("position");
+
 
         Log.e(TAG, "position: " + selectedPosition);
         Log.e(TAG, "images size: " + images.size());
@@ -85,11 +89,11 @@ public class SlideshowDialogFragment  extends DialogFragment {
     };
 
     private void displayMetaInfo(int position) {
-        lblCount.setText((position + 1) + " of " + images.size());
+        lblCount.setText((position) + " of " + images.size());
 
         Image image = images.get(position);
-        lblTitle.setText(image.getName());
-        lblDate.setText(image.getTimestamp());
+        lblTitle.setText(image.name);
+        lblDate.setText(image.thumb);
     }
 
     @Override
@@ -116,11 +120,18 @@ public class SlideshowDialogFragment  extends DialogFragment {
 
             Image image = images.get(position);
 
-            Glide.with(getActivity()).load(image.getLarge())
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imageViewPreview);
+            if (TextUtils.isEmpty(image.thumb)) {
+                imageViewPreview.setImageResource(R.drawable.logo_geardo);
+            } else {
+                Picasso.with(getActivity()).load(CommonConstants.ROOT_PATH+image.thumb).into(imageViewPreview);
+                //mImageLoader.loadAssetsImage(mContext, Uri.parse(CommonConstants.ROOT_PATH + productItem.imageUrlOriginal), holder.ivProductImage);
+            }
+//
+//            Glide.with(getActivity()).load(image.getLarge())
+//                    .thumbnail(0.5f)
+//                    .crossFade()
+//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                    .into(imageViewPreview);
 
             container.addView(view);
 

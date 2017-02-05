@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Collections;
@@ -24,7 +26,7 @@ public class DasunsAdapter extends RecyclerView.Adapter<DasunsAdapter.MyViewHold
     Context context;
     private ClickListener clickListener;
 
-    public DasunsAdapter(Context context, List<Information> data){
+    public DasunsAdapter(Context context, List<Information> data ){
 
         inflater = LayoutInflater.from(context);
         this.data = data;
@@ -35,7 +37,6 @@ public class DasunsAdapter extends RecyclerView.Adapter<DasunsAdapter.MyViewHold
     @Override
     public DasunsAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        Log.i("Dasun's Adapter","onCreateViewHolder");
         View view = inflater.inflate(R.layout.custom_row,parent,false);
         MyViewHolder holder = new MyViewHolder(view);
 
@@ -48,7 +49,6 @@ public class DasunsAdapter extends RecyclerView.Adapter<DasunsAdapter.MyViewHold
 
      try{
 
-         Log.i("Dasun's Adapter","onBindViewHolder "+position);
          Information current = data.get(position);
 
          holder.title.setText(current.title);
@@ -97,15 +97,17 @@ public class DasunsAdapter extends RecyclerView.Adapter<DasunsAdapter.MyViewHold
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        RelativeLayout llOuter;
         TextView title;
         ImageView icon;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
+            llOuter = (RelativeLayout) itemView.findViewById(R.id.llOuter);
             title = (TextView) itemView.findViewById(R.id.listText);
             icon = (ImageView) itemView.findViewById(R.id.listIcon);
-            icon.setOnClickListener(this);
+            llOuter.setOnClickListener(this);
         }
 
         @Override

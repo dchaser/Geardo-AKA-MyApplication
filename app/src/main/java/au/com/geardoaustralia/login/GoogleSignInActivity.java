@@ -44,6 +44,8 @@ public class GoogleSignInActivity extends BaseActivity implements
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
     private GoogleApiClient mGoogleApiClient;
+
+
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
@@ -53,11 +55,13 @@ public class GoogleSignInActivity extends BaseActivity implements
     // [END declare_auth_listener]
 
 
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
+
     private SignInButton google_sign_in_button;
     private Button google_sign_out_button;
+
     private Button google_disconnect_button;
+    private TextView mStatusTextView;
+    private TextView mDetailTextView;
 
 
     private String google_id = "google_id";

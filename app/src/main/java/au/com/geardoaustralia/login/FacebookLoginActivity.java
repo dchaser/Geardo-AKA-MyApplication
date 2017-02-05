@@ -44,14 +44,7 @@ public class FacebookLoginActivity extends BaseActivity implements
 
     private static final String TAG = "FacebookLogin";
 
-    private String fb_id = "fb_id";
-    private String fb_name = "fb_name";
-    private String fb_email = "fb_email";
-    private String fb_dob = "fb_dob";
-    private String fb_image_url = "fb_image_url";
 
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
     private ProfilePictureView icon;
 
     // [START declare_auth]
@@ -63,6 +56,17 @@ public class FacebookLoginActivity extends BaseActivity implements
 // [END declare_auth_listener]
 
     private CallbackManager mCallbackManager;
+
+    private String fb_id = "fb_id";
+    private String fb_name = "fb_name";
+    private String fb_email = "fb_email";
+    private String fb_dob = "fb_dob";
+    private String fb_image_url = "fb_image_url";
+
+
+    private TextView mStatusTextView;
+    private TextView mDetailTextView;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,7 +123,7 @@ public class FacebookLoginActivity extends BaseActivity implements
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
-                                Log.v("LoginActivity", response.toString());
+                                Log.v("SignInActivity", response.toString());
 
                                 // Application code
                                 try {

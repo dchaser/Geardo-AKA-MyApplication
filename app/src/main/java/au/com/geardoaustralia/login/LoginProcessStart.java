@@ -52,7 +52,7 @@ public class LoginProcessStart extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(LoginProcessStart.this, LoginActivity.class));
+                    startActivity(new Intent(LoginProcessStart.this, SignInActivity.class));
                     finish();
                 }
             }

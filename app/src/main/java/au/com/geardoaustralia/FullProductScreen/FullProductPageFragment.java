@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -34,6 +35,7 @@ import au.com.geardoaustralia.MainActivity;
 import au.com.geardoaustralia.R;
 import au.com.geardoaustralia.cartNew.data.Product;
 import au.com.geardoaustralia.cartNew.database.DatabaseManager;
+import au.com.geardoaustralia.cartNew.widget.AddCartDialogActivity;
 import au.com.geardoaustralia.gallery.GalleryAdapter;
 import au.com.geardoaustralia.gallery.Image;
 import au.com.geardoaustralia.gallery.SlideshowDialogFragment;
@@ -45,7 +47,10 @@ import de.keyboardsurfer.android.widget.crouton.Style;
  * Created by DasunPC on 1/5/17.
  */
 
-public class FullProductPageFragment extends Fragment implements FullProductPage.ProductPageClickListener {
+public class FullProductPageFragment extends Fragment  {
+
+    //implements FullProductPage.ProductPageClickListener
+
     private String TAG = FullProductPageFragment.class.getSimpleName();
     private static final String endpoint = "http://www.delaroystudios.com/glide/json/glideimages.json";
     private ArrayList<Image> images;
@@ -65,6 +70,8 @@ public class FullProductPageFragment extends Fragment implements FullProductPage
     public static int selectedGalleryPosition = 0;
 
     FloatingActionButton icAddToWishListt;
+    public static FloatingActionButton fabAddToCart;
+
 
     //charts
     LinearLayout llFiveStars;
@@ -89,13 +96,43 @@ public class FullProductPageFragment extends Fragment implements FullProductPage
         tvImgCount = (TextView) layout.findViewById(R.id.tvImgCount);
         icAddToWishListt = (FloatingActionButton) layout.findViewById(R.id.icAddToWishListt);
 
+
         llFiveStars = (LinearLayout) layout.findViewById(R.id.llFiveStars);
         llFourStars = (LinearLayout) layout.findViewById(R.id.llFourStars);
         llThreeStars = (LinearLayout) layout.findViewById(R.id.llThreeStars);
         llTwoStars = (LinearLayout) layout.findViewById(R.id.llTwoStars);
         llOneStars = (LinearLayout) layout.findViewById(R.id.llOneStars);
 
+        fabAddToCart = (FloatingActionButton) getActivity().findViewById(R.id.fabAddToCart);
 
+        fabAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Product product = bundle.getParcelable(FullProductPage.SELECTED_PRODUCT);
+
+                if (bundle != null) {
+
+
+//                    lvSizeSelector.setAdapter(new ArrayAdapter<String>(FullProductPage.this, android.R.layout.simple_list_item_1, android.R.id.text1, infoModel.sizes));
+//                    lvSizeSelector.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//
+//                        }
+//                    });
+
+                    //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    //invoke bottom sheet to display
+
+                    Intent intent = new Intent(getActivity(), AddCartDialogActivity.class);
+                    intent.putExtra(AddCartDialogActivity.SELECTED_PRODUCT_ITEM, selectedProduct);
+                    startActivityForResult(intent, AddCartDialogActivity.REQUEST_TO_ADD_IN_CART);
+
+                }
+            }
+        });
 
         bundle = getArguments();
 
@@ -231,13 +268,10 @@ public class FullProductPageFragment extends Fragment implements FullProductPage
                             try {
                                 JSONObject object = response.getJSONObject(i);
                                 Image image = new Image();
-                                image.setName(object.getString("name"));
+                                image.name = (object.getString("name"));
 
                                 JSONObject url = object.getJSONObject("url");
-                                image.setSmall(url.getString("small"));
-                                image.setMedium(url.getString("medium"));
-                                image.setLarge(url.getString("large"));
-                                image.setTimestamp(object.getString("timestamp"));
+                                image.thumb = (url.getString("thumb"));
 
                                 images.add(image);
 
@@ -263,19 +297,19 @@ public class FullProductPageFragment extends Fragment implements FullProductPage
         GlobalContext.getInstance().addToRequestQueue(req);
     }
 
-    @Override
-    public void overViewClicked(View v, int position) {
-
-    }
-
-    @Override
-    public void relatedClickedViewClicked(View v, int position) {
-
-    }
-
-    @Override
-    public void ratingsClicked(View v, int position) {
-
-    }
+//    @Override
+//    public void overViewClicked(View v, int position) {
+//
+//    }
+//
+//    @Override
+//    public void relatedClickedViewClicked(View v, int position) {
+//
+//    }
+//
+//    @Override
+//    public void ratingsClicked(View v, int position) {
+//
+//    }
 //
 }

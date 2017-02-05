@@ -9,6 +9,8 @@ public interface CartInteractor {
 
     void removeItemFromCart(Object item, OnCartResponseListener listener);
 
+    void removeAllItemsFromCart(OnCartResponseListener listener);
+
     void getTotalItemsInCart(OnCartResponseListener listener);
 
     void getCategoryItems(OnCartResponseListener listener, int categoryId);

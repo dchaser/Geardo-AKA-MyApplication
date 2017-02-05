@@ -4,72 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent">
-
-    <ListView
-        android:id="@+id/lvAutoScroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent" />
+    android:background="@drawable/splash_page_image">
 
 
-    <LinearLayout
-        android:layout_width="@dimen/twofifty"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@color/white"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <com.github.siyamed.shapeimageview.CircularImageView
-            android:id="@+id/civPImage"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:scaleType="center"
-            android:src="@drawable/ic_account_circle_black_48dp"
-            app:siBorderColor="@android:color/transparent"
-            app:siBorderWidth="6dp" />
-
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:text="Dasun Chathuradha"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/btnCreateAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rounded_corners"
-            android:text="CREATE ACCOUNT"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/tvAlreadyHaveAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:text="already have an account?" />
-
-        <Button
-            android:id="@+id/btnSignIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:text="SIGN IN"
-            android:textColor="@color/lightBlue"
-            android:textStyle="bold" />
-
-    </LinearLayout>
 
 
 </RelativeLayout>

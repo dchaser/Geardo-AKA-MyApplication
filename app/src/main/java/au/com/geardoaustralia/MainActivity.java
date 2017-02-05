@@ -1,9 +1,27 @@
 package au.com.geardoaustralia;
 
-import android.app.SearchManager;
-import android.content.ComponentName;
-import android.content.Context;
+import android.annotation.TargetApi;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,47 +29,40 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
-import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerFragment;
+import au.com.geardoaustralia.FullProductScreen.FullProductPage;
+import au.com.geardoaustralia.MainScreen.NavdrawerMainActivity.NavigationDrawerLeft;
 import au.com.geardoaustralia.cartNew.BaseActivity;
+import au.com.geardoaustralia.cartNew.CartActivity;
 import au.com.geardoaustralia.cartNew.CommonTabFragment;
 import au.com.geardoaustralia.cartNew.database.DatabaseHelper;
+import au.com.geardoaustralia.categories.CategorySelectionScreen;
+import au.com.geardoaustralia.login.SignupActivity;
 import au.com.geardoaustralia.utils.GlobalContext;
 import au.com.geardoaustralia.utils.MenuBarHandler;
+import au.com.geardoaustralia.utils.Sliding;
+import au.com.geardoaustralia.utils.utilKit;
 
 import static au.com.geardoaustralia.cartNew.util.LogUtils.LOGD;
 
 public class MainActivity extends BaseActivity implements CommonTabFragment.TabListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private NavigationDrawerFragment drawerFragment;
-
     private ViewPager viewPager;
     private TabLayout mTabLayout;
-
     MenuBarHandler menuBarHandler;
-
-    //Database Objects
-    DatabaseHelper databaseHelper;
-
     OurViewPagerAdapter mViewPagerAdapter = null;
-    private Set<CommonTabFragment> mTabFragments = new HashSet<CommonTabFragment>();
-
-    //titles for tab layout items (indices must correspond to the above)
-    private static final int[] TAB_TITLE_RES_ID = new int[]{
-            R.string.on_sale,
-    };
-
-
-    SearchView searchView;
 
 
 
@@ -60,16 +71,29 @@ public class MainActivity extends BaseActivity implements CommonTabFragment.TabL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_appbar);
 
-        drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), baseToolbar);
+        // Add the back button to the toolbar.
+        Toolbar toolbar = getActionBarToolbar();
+        toolbar.setNavigationIcon(R.drawable.hamburger);
+        toolbar.setNavigationContentDescription(R.string.close_and_go_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    startActivity(new Intent(MainActivity.this, TopSliderActivity.class));
+                    overridePendingTransition(R.anim.slide_up, R.anim.stay);
+            }
+        });
+
 
         menuBarHandler = new MenuBarHandler(MainActivity.this);
+
+
         //setup tabs
         mTabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         viewPager = (ViewPager) findViewById(R.id.pager);
 
         new Handler().postDelayed(
-                new Runnable(){
+                new Runnable() {
                     @Override
                     public void run() {
                         renderTabsWithPage();
@@ -83,16 +107,15 @@ public class MainActivity extends BaseActivity implements CommonTabFragment.TabL
                 }, 100);
 
 
-
-
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         invalidateOptionsMenu();
 
-        if(menuBarHandler != null){
+        if (menuBarHandler != null) {
             GlobalContext globalContext = GlobalContext.getInstance();
             globalContext.selectedPage = 0;
             menuBarHandler = new MenuBarHandler(MainActivity.this);
@@ -105,11 +128,11 @@ public class MainActivity extends BaseActivity implements CommonTabFragment.TabL
         mViewPagerAdapter = new OurViewPagerAdapter(getSupportFragmentManager());
         MyFragment first = new MyFragment();
         Bundle f = new Bundle();
-        f.putInt("tag",0);
+        f.putInt("tag", 0);
         first.setArguments(f);
         MyFragment second = new MyFragment();
         Bundle s = new Bundle();
-        s.putInt("tag",1);
+        s.putInt("tag", 1);
         second.setArguments(s);
         mViewPagerAdapter.addFragment(first, "Latest");
         mViewPagerAdapter.addFragment(second, "Trendy");
@@ -191,8 +214,6 @@ public class MainActivity extends BaseActivity implements CommonTabFragment.TabL
     }
 
 
-
-
     @Override
     public void onTabFragmentAttached(Fragment fragment) {
 
@@ -229,7 +250,7 @@ public class MainActivity extends BaseActivity implements CommonTabFragment.TabL
             return POSITION_NONE;
         }
 
-        public void addFragment(Fragment fragment, String title){
+        public void addFragment(Fragment fragment, String title) {
             fragments.add(fragment);
             fragmentTitles.add(title);
         }
@@ -244,7 +265,6 @@ public class MainActivity extends BaseActivity implements CommonTabFragment.TabL
             return fragmentTitles.get(position);
         }
     }
-
 
 
 }

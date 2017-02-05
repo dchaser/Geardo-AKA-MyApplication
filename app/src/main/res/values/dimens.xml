@@ -16,6 +16,7 @@
     <dimen name="element_divider_bottom">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="logo_w_h">100dp</dimen>
+    <dimen name="hundred_and_fifty">150dp</dimen>
     <dimen name="fortydp">40dp</dimen>
     <dimen name="dp2_deimension">2dp</dimen>
     <dimen name="category_height">50dp</dimen>
@@ -24,6 +25,9 @@
     <dimen name="icon_bottom_margin">24dp</dimen>
     <dimen name="title_bottom_margin">16dp</dimen>
     <dimen name="field_width_standard">160dp</dimen>
+    <dimen name="fivedp">5dp</dimen>
+    <dimen name="twentydp">20dp</dimen>
+    <dimen name="tendp">10dp</dimen>
 
 
     <dimen name="headerbar_elevation">4dp</dimen>

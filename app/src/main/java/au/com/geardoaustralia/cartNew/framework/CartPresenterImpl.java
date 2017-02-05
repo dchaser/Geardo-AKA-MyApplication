@@ -87,6 +87,11 @@ public class CartPresenterImpl implements CartPresenter, OnCartResponseListener 
     }
 
     @Override
+    public void removeAllItems() {
+        cartInteractor.removeAllItemsFromCart(this);
+    }
+
+    @Override
     public void showMeCategoryItems(int categoryId) {
         cartInteractor.getCategoryItems(this, categoryId);
     }

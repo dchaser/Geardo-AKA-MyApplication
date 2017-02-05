@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:focusable="false"
+
     android:orientation="horizontal">
 
     <ImageView
@@ -24,14 +25,9 @@
         android:drawableRight="@drawable/ic_chevron_right_black_18dp"
         android:gravity="center_vertical|center_horizontal"
         android:padding="2dp"
-        android:textColor="@color/black"
         android:textSize="20sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp2_deimension"
-        android:layout_below="@+id/tvCategoryTitle"
-        android:background="@color/gray" />
+
 
 
 </LinearLayout>

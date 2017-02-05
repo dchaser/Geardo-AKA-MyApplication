@@ -10,6 +10,7 @@ public class CommonConstants {
 
     public static final String ROOT_PATH = "file:///android_asset/product/";
     public static final String USER_PATH = "file:///android_asset/userimages/";
+    public static final String CATEGORY_PATH = "file:///android_asset/category/";
 
     public static final DecimalFormat decimalFormat = new DecimalFormat("#,###,###.##");
 

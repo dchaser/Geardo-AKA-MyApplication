@@ -368,17 +368,20 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:gravity="end"
+                android:layout_weight="0.4"
                 android:orientation="horizontal">
 
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@color/lightorange"
-                    android:text="BUY"
-                    android:textColor="@color/white"
-                    android:visibility="gone" />
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabAddToCart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_add_shopping_cart_white_48dp"
+                    app:fabSize="mini"
+                    app:layout_anchorGravity="bottom|right|end" />
 
             </LinearLayout>
 

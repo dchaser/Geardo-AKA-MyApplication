@@ -69,13 +69,13 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.VerticalIt
                             try {
                                 JSONObject object = response.getJSONObject(i);
                                 Image image = new Image();
-                                image.setName(object.getString("name"));
+                                image.name = (object.getString("name"));
 
                                 JSONObject url = object.getJSONObject("url");
-                                image.setSmall(url.getString("small"));
-                                image.setMedium(url.getString("medium"));
-                                image.setLarge(url.getString("large"));
-                                image.setTimestamp(object.getString("timestamp"));
+                                image.thumb = (url.getString("thumb"));
+//                                image.setMedium(url.getString("medium"));
+//                                image.setLarge(url.getString("large"));
+//                                image.setTimestamp(object.getString("timestamp"));
 
                                 mItems.add(image);
 
@@ -113,17 +113,17 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.VerticalIt
     public void onBindViewHolder(VerticalItemHolder itemHolder, int position) {
         Image item = mItems.get(position);
 
-        Glide.with(mContext).load(item.getMedium())
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(itemHolder.iv_logo_team_away);
-
-        Glide.with(mContext).load(item.getMedium())
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(itemHolder.iv_logo_team_home);
+//        Glide.with(mContext).load(item.getMedium())
+//                .thumbnail(0.5f)
+//                .crossFade()
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .into(itemHolder.iv_logo_team_away);
+//
+//        Glide.with(mContext).load(item.getMedium())
+//                .thumbnail(0.5f)
+//                .crossFade()
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .into(itemHolder.iv_logo_team_home);
     }
 
     @Override

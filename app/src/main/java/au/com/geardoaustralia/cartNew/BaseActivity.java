@@ -20,7 +20,9 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.app.SearchableInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -28,16 +30,21 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,6 +59,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import au.com.geardoaustralia.DoubleDrawerActivity;
 import au.com.geardoaustralia.MainActivity;
 import au.com.geardoaustralia.R;
 import au.com.geardoaustralia.cartNew.framework.CartPresenter;
@@ -59,6 +67,7 @@ import au.com.geardoaustralia.cartNew.framework.CartPresenterImpl;
 import au.com.geardoaustralia.cartNew.framework.CartView;
 import au.com.geardoaustralia.cartNew.util.MenuCounterDrawable;
 import au.com.geardoaustralia.cartNew.widget.MultiSwipeRefreshLayout;
+import au.com.geardoaustralia.categories.CategorySelectionScreen;
 import butterknife.Bind;
 
 import static au.com.geardoaustralia.cartNew.util.LogUtils.LOGD;
@@ -74,9 +83,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MultiSwi
 
     private static final String TAG = makeLogTag(BaseActivity.class);
 
+    @VisibleForTesting
+    public ProgressDialog mProgressDialog;
+
     // Primary toolbar and drawer toggle
     public Toolbar baseToolbar;
 
+    boolean doubleBackToExitPressedOnce = false;
 
     // variables that control the Action Bar auto hide behavior (aka "quick recall")
     private boolean mActionBarAutoHideEnabled = false;
@@ -114,6 +127,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MultiSwi
     public CartPresenter cartPresenter;
     public SearchView searchView;
 
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private View mLeftDrawerView;
+    private View mRightDrawerView;
+    private Intent intent = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +146,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MultiSwi
             ab.setDisplayHomeAsUpEnabled(true);
         }
         cartPresenter = new CartPresenterImpl(this);
+
+        if(intent == null){
+
+            handleIntent(getIntent());
+        }
+
+
     }
 
     @Override
@@ -144,6 +171,21 @@ public abstract class BaseActivity extends AppCompatActivity implements MultiSwi
         }
     }
 
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(getString(R.string.loading));
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
 
     @Override
     protected void onResume() {
@@ -226,6 +268,18 @@ public abstract class BaseActivity extends AppCompatActivity implements MultiSwi
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        hideProgressDialog();
     }
 
     protected void enableActionBarAutoHide(final ListView listView) {
@@ -443,10 +497,33 @@ public abstract class BaseActivity extends AppCompatActivity implements MultiSwi
         getMenuInflater().inflate(R.menu.home_act_filtered, menu);
         this.menu = menu;
 
-        searchView = (SearchView) menu.findItem(R.id.mSearch).getActionView();
-        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this,MainActivity.class)));
+        MenuItem searchItem = menu.findItem(R.id.mSearch);
 
+        searchView = (SearchView) menu.findItem(R.id.mSearch).getActionView();
+
+        if (isAlwaysExpanded()) {
+            searchView.setIconifiedByDefault(false);
+        } else {
+            searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM
+                    | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+        }
+
+        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        List<SearchableInfo> searchableInfos = searchManager.getSearchablesInGlobalSearch();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this,MainActivity.class)));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+               // Log.d("Query Submitted", "Query SubmittedQuery SubmittedQuery SubmittedQuery SubmittedQuery SubmittedQuery SubmittedQuery SubmittedQuery Submitted");
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Log.d("Query", newText);
+                return true;
+            }
+        });
 
         // getMenuInflater().inflate(R.menu.home_act_filtered, menu);
        // searchView = (SearchView) menu.findItem(R.id.mSearch).getActionView();
@@ -459,12 +536,32 @@ public abstract class BaseActivity extends AppCompatActivity implements MultiSwi
         return true;
     }
 
+    protected boolean isAlwaysExpanded() {
+        return false;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        this.intent = intent;
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            // Do work using string
+
+            Log.d("String " , query);
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_cart:
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                 startActivity(intent);
+
                 return true;
 
 
@@ -539,6 +636,31 @@ public abstract class BaseActivity extends AppCompatActivity implements MultiSwi
 
     @Override
     public void onProductActionResponse(boolean isActionSuccessful) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.doubleBackToExitPressedOnce = true;
+
+        //modified not fixed
+        if(this instanceof MainActivity){
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
+        }
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
 
     }
 }

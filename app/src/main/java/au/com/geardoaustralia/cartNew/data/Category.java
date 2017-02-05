@@ -1,5 +1,7 @@
 package au.com.geardoaustralia.cartNew.data;
 
+import java.util.ArrayList;
+
 /**
  * Created by ashish (Min2) on 08/02/16.
  * <p/>
@@ -16,5 +18,6 @@ public class Category {
     public String imageUrlMedium;
     public String name;
     public String searchTags;
+    public ArrayList<Subcategory> subCategoryList;
 
 }

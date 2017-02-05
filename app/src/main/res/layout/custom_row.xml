@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/custom_bg_item"
+    android:id="@+id/llOuter"
     android:clickable="true"
+    android:background="@drawable/custom_bg_item"
     android:orientation="horizontal">
 
     <ImageView
@@ -11,14 +12,15 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:padding="16dp"
+        android:textSize="18sp"
+        android:theme="@style/RobotoTextViewStyle"
         android:layout_gravity="center_vertical"
         android:layout_centerVertical="true"
         android:id="@+id/listText"

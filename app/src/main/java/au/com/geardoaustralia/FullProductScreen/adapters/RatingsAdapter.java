@@ -17,7 +17,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.github.siyamed.shapeimageview.CircularImageView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ import au.com.geardoaustralia.utils.CommonConstants;
 
 public class RatingsAdapter extends RecyclerView.Adapter<RatingsAdapter.RatingsViewHolder> {
 
-    public FullProductPage.ProductPageClickListener mItemClickListener;
+//    public FullProductPage.ProductPageClickListener mItemClickListener;
     private ArrayList<CustomerReview> reviews;
     private ArrayList<User> users;
     private Context mContext;
@@ -71,10 +70,10 @@ public class RatingsAdapter extends RecyclerView.Adapter<RatingsAdapter.RatingsV
         public void onClick(View v) {
 
             if (v.getId() == R.id.card_view) {
-                if (mItemClickListener != null) {
-
-                    mItemClickListener.ratingsClicked(v, -1);
-                }
+//                if (mItemClickListener != null) {
+//
+//                    mItemClickListener.ratingsClicked(v, -1);
+//                }
 
             }
 
@@ -120,7 +119,7 @@ public class RatingsAdapter extends RecyclerView.Adapter<RatingsAdapter.RatingsV
             mImageLoader.loadAssetsImage(mContext, Uri.parse(CommonConstants.USER_PATH + review.user.imageUrlThumb), holder.ivUserImage);
         }
 
-        holder.tvUserName.setText(review.user.firstname + " " + review.user.lastname);
+        holder.tvUserName.setText(review.user.display_name);
 
         double d = review.value;
 
